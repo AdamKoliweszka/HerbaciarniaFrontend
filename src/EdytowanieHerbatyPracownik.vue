@@ -1,45 +1,60 @@
 <template>
   <div id="app">
     <MenuPracownik/>
-    <div>
-      Nazwa:
-      <input type="text" v-model="herbata.nazwa_herbaty">
+    <div v-if="herbata != null && gatunki != null && kraje != null">
+      <div>
+        Nazwa:
+        <input type="text" v-model="herbata.nazwa_herbaty">
+      </div>
+      <div>
+        Opis:
+        <textarea v-model="herbata.opis"/>
+      </div>
+      <div>
+        Cena sprzedaży:
+        <input type="number" v-model="herbata.cenaSprzedazy">
+      </div>
+      <div>
+        Cena dostawy:
+        <input type="number" v-model="herbata.cenaDostawy">
+      </div>
+      <div>
+        Gatunek:
+        <select v-model="herbata.gatunekHerbaty" class="combo_EdytowanieGatunkow">
+          <option
+            v-for="Gatunek in gatunki"
+            :value="Gatunek"
+            v-bind:key="'gatunek' + Gatunek.nazwa_gatunku"
+          >{{Gatunek.nazwa_gatunku}}</option>
+        </select>
+      </div>
+      <div>
+        Kraj pochodzenia:
+        <select v-model="herbata.krajPochodzenia" class="combo_EdytowanieKrajow">
+          <option
+            v-for="Kraj in kraje"
+            :value="Kraj"
+            v-bind:key="'kraj' + Kraj.nazwa_kraju"
+          >{{Kraj.nazwa_kraju}}</option>
+        </select>
+      </div>
+      <div>
+        <input type="button" @click="edit" value="Edytuj">
+      </div>
     </div>
-    <div>
-      Opis:
-      <textarea v-model="herbata.opis" />
+
+    <div v-if="gatunki == null || kraje == null">
+      <p>Brak połączenia z serwerem!</p>
     </div>
-    <div>
-      Cena sprzedaży:
-      <input type="number" v-model="herbata.cenaSprzedazy">
+
+    <div v-if="isEdited">
+      <p>Herbata została poprawnie edytowana!</p>
     </div>
-    <div>
-      Cena dostawy:
-      <input type="number" v-model="herbata.cenaDostawy">
+
+    <div v-if="isError">
+      <p>Operacja się nie powiodła!</p>
     </div>
-    <div>
-      Gatunek:
-      <select v-model="herbata.gatunekHerbaty" class="combo_EdytowanieGatunkow">
-        <option
-          v-for="Gatunek in gatunki"
-          :value="Gatunek"
-          v-bind:key="'gatunek' + Gatunek.nazwa_gatunku"
-        >{{Gatunek.nazwa_gatunku}}</option>
-      </select>
-    </div>
-    <div>
-      Kraj pochodzenia:
-      <select v-model="herbata.krajPochodzenia" class="combo_EdytowanieKrajow">
-        <option
-          v-for="Kraj in kraje"
-          :value="Kraj"
-          v-bind:key="'kraj' + Kraj.nazwa_kraju"
-        >{{Kraj.nazwa_kraju}}</option>
-      </select>
-    </div>
-  <div>
-    <input type="button" @click="edytuj" value="Edytuj">
-  </div>
+
   </div>
 </template>
 
@@ -52,7 +67,7 @@ export default {
     DataAccess.getWszystkieHerbatyById(this.$route.params.id).then(data => {
       this.herbata = data;
     });
-     DataAccess.getGatunki().then(data => {
+    DataAccess.getGatunki().then(data => {
       this.gatunki = data;
     });
     DataAccess.getKraje().then(data => {
@@ -75,16 +90,25 @@ export default {
         krajPochodzenia: null
       },
       gatunki: null,
-      kraje: null
+      kraje: null,
+      isEdited: false,
+      isError: false
     };
   },
   methods: {
-    edytuj(){
-      DataAccess.aktualizacjaHerbaty(this.herbata).then(() => {
-          DataAccess.getWszystkieHerbatyById(this.$route.params.id).then(data => {
-            this.herbata = data;
-          });
+    edit() {
+      if (!this.isEdited) {
+        DataAccess.aktualizacjaHerbaty(this.herbata).then(() => {
+          this.isEdited = true;
+          this.isError = true;
+          this.clear();
+        }).catch(() => {
+            this.isError = true;
         });
+      }
+    },
+    clear() {
+      this.herbata = null;
     }
   }
 };

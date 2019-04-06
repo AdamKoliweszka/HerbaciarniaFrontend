@@ -17,8 +17,10 @@ var DataAccess = {
             })
             .then(response => {
                 return response.data;
+            })
+            .catch(() => {
+                return null;
             });
-
     },
     getWszystkieHerbatyById(id) {
         var link = "http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie/" + id;
@@ -34,6 +36,19 @@ var DataAccess = {
             .then(response => {
                 return response.data;
             });
+    },
+    dodawanieHerbaty(herbata) {
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Herbaty",
+            herbata, {
+                params: null,
+                withCredentials: true,
+                auth: {
+                    username: this.uzytkownik.username,
+                    password: this.uzytkownik.password
+                }
+            }
+        );
     },
     aktualizacjaHerbaty(herbata) {
         return axios.put(
@@ -95,6 +110,9 @@ var DataAccess = {
             .get("http://" + this.adresIPPort + "/myapp/GatunkiHerbaty")
             .then(response => {
                 return response.data;
+            })
+            .catch(() => {
+                return null;
             });
     },
     dodawanieGatunku(nowyGatunek) {
@@ -140,6 +158,9 @@ var DataAccess = {
             .get("http://" + this.adresIPPort + "/myapp/KrajePochodzenia")
             .then(response => {
                 return response.data;
+            })
+            .catch(() => {
+                return null;
             });
     },
     dodawanieKraju(nowyKraj) {
