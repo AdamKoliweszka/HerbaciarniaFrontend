@@ -80,7 +80,6 @@ export default {
       this.komunikatEdycjaKraju = "komunikatBleduNiewidoczny";
     },
     usunKraj() {
-      console.log(this.selectedKraj);
       if (this.selectedKraj == null) {
         this.komunikatEdycjaKraju = "komunikatKrajPusty";
       } else if (this.selectedKraj.id_kraju > 1) {

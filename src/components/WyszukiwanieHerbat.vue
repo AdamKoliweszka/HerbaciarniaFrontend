@@ -17,7 +17,6 @@
 import DataAccess from "@/components/DataAccess.js";
 import Filtracja from "@/components/Filtracja.vue";
 import ListaHerbatKlient from "@/components/ListaHerbatKlient.vue";
-import axios from "axios";
 export default {
   name: "app",
   components: {

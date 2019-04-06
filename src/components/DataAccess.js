@@ -1,6 +1,6 @@
 import axios from "axios";
 var DataAccess = {
-    adresIPPort: "10.211.55.5:8086",
+    adresIPPort: "localhost:8086",
     uzytkownik: {
         username: "bill",
         password: "abc123"
@@ -34,6 +34,19 @@ var DataAccess = {
             .then(response => {
                 return response.data;
             });
+    },
+    aktualizacjaHerbaty(herbata) {
+        return axios.put(
+            "http://" + this.adresIPPort + "/myapp/Herbaty",
+            herbata, {
+                params: null,
+                withCredentials: true,
+                auth: {
+                    username: this.uzytkownik.username,
+                    password: this.uzytkownik.password
+                }
+            }
+        );
     },
     getWszystkieHerbatyFiltred(argument) {
         return axios
@@ -198,8 +211,3 @@ export default DataAccess
 //Put pracownik
 //Post pracownik
 
-//Herbaty
-//Get pracownik
-//Delete pracownik
-//Put pracownik
-//Post pracownik

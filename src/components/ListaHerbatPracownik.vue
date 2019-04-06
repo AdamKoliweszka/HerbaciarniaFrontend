@@ -11,7 +11,7 @@
           <br>
           Cena: {{Herbata.cenaSprzedazy}}
           Ilosc: {{Herbata.iloscDostepna}}
-          <router-link class="itemMenu" to="/pracownik/herbaty">Edytuj</router-link>
+          <router-link class="itemMenu" :to="{ path:'pracownik/herbaty/'+Herbata.id_herbaty }">Edytuj</router-link>
         </div>
       </div>
     </div>
