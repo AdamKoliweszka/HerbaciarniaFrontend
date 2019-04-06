@@ -45,13 +45,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "MenuPracownik",
-  components: {
-    DataAccess
-  },
   mounted() {
     DataAccess.getGatunki().then(data => {
       this.gatunki = data;
