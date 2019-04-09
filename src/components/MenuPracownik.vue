@@ -5,6 +5,7 @@
       <router-link class="itemMenu" to="/pracownik/dodawanieHerbaty">Dodawanie herbaty</router-link>
       <router-link class="itemMenu" to="/pracownik/gatunki">Edytowanie gatunków</router-link>
       <router-link class="itemMenu" to="/pracownik/kraje">Edytowanie krajów</router-link>
+      <router-link class="itemMenu" to="/pracownik/dostawcy">Lista dostawców</router-link>
     </div>
     <div class="PasekOdstepuMenu"></div>
   </div>

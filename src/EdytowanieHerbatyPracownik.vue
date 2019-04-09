@@ -100,7 +100,7 @@ export default {
       if (!this.isEdited) {
         DataAccess.aktualizacjaHerbaty(this.herbata).then(() => {
           this.isEdited = true;
-          this.isError = true;
+          this.isError = false;
           this.clear();
         }).catch(() => {
             this.isError = true;

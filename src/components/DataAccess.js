@@ -200,7 +200,17 @@ var DataAccess = {
                 password: this.uzytkownik.password
             }
         });
-    }
+    },
+    getDostawcy() {
+        return axios
+            .get("http://" + this.adresIPPort + "/myapp/Dostawcy")
+            .then(response => {
+                return response.data;
+            })
+            .catch(() => {
+                return null;
+            });
+    },
 }
 export default DataAccess
 //opisanie api serwera
