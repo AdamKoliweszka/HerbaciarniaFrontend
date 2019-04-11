@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div v-if="species == null || countries == null">
+    <div v-if="gatunki == null || kraje == null">
       <p>Brak połączenia z serwerem!</p>
     </div>
 
@@ -64,14 +64,14 @@ import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "EdytowanieHerbatyPracownik",
   mounted() {
-    DataAccess.getAllTeeById(this.$route.params.id).then(data => {
-      this.tea = data;
+    DataAccess.getWszystkieHerbatyById(this.$route.params.id).then(data => {
+      this.herbata = data;
     });
-    DataAccess.getSpecies().then(data => {
-      this.species = data;
+    DataAccess.getGatunki().then(data => {
+      this.gatunki = data;
     });
-    DataAccess.getCountries().then(data => {
-      this.countries = data;
+    DataAccess.getKraje().then(data => {
+      this.kraje = data;
     });
   },
   components: {
@@ -79,18 +79,18 @@ export default {
   },
   data: function() {
     return {
-      tea: {
-        id_tea: 0,
-        name: "",
-        description: "",
-        price_of_selling: 1,
-        price_of_delivery: 0,
-        available_quantity: 0,
-        tea_species: null,
-        country_of_origin: null
+      herbata: {
+        id_herbaty: 0,
+        nazwa_herbaty: "",
+        opis: "",
+        cenaSprzedazy: "",
+        cenaDostawy: "",
+        iloscDostepna: 0,
+        gatunekHerbaty: null,
+        krajPochodzenia: null
       },
-      species: null,
-      countries: null,
+      gatunki: null,
+      kraje: null,
       isEdited: false,
       isError: false
     };
@@ -98,7 +98,7 @@ export default {
   methods: {
     edit() {
       if (!this.isEdited) {
-        DataAccess.updateTea(this.tea).then(() => {
+        DataAccess.aktualizacjaHerbaty(this.herbata).then(() => {
           this.isEdited = true;
           this.isError = false;
           this.clear();
@@ -108,7 +108,7 @@ export default {
       }
     },
     clear() {
-      this.tea= null;
+      this.herbata = null;
     }
   }
 };

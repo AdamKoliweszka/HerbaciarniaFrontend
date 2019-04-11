@@ -31,11 +31,11 @@ export default {
   },
   data: function() {
     return {
-      providers: []
+      dostawcy: []
     };
   },
   mounted() {
-    DataAccess.getProviders().then(data => {this.providers = data});
+    DataAccess.getDostawcy().then(data => {this.dostawcy = data});
   },
 };
 </script>

@@ -3,12 +3,12 @@
     <MenuPracownik />
     <div>
       <FiltracjaPracownik
-        :kraje="countries"
-        :gatunki="species"
-        @click="search"
+        :kraje="kraje"
+        :gatunki="gatunki"
+        @click="szukaj"
         class="LewyPasekWyszukiwanieHerbat"
       />
-      <ListaHerbatPracownik :herbaty="tea" class="PrawyPasekWyszukiwanieHerbat"/>
+      <ListaHerbatPracownik :herbaty="herbaty" class="PrawyPasekWyszukiwanieHerbat"/>
     </div>
   </div>
 </template>
@@ -26,21 +26,22 @@ export default {
     ListaHerbatPracownik
   },
   methods: {
-    search(argument) {
-      DataAccess.getAllTeaFiltred(argument).then(data => {this.tea = data});
+    szukaj(argument) {
+      DataAccess.getWszystkieHerbatyFiltred(argument).then(data => {this.herbaty = data});
     }
   },
   data: function() {
     return {
-      tea: [],
-      species: [],
-      countries: []
+      herbaty: [],
+      gatunki: [],
+      kraje: []
     };
   },
   mounted() {
-    DataAccess.getSpecies().then(data => {this.species = data});
-    DataAccess.getAllTea().then(data => {this.tea = data});
-    DataAccess.getCountries().then(data => {this.countries = data});
+    DataAccess.getGatunki().then(data => {this.gatunki = data});
+    DataAccess.getWszystkieHerbaty().then(data => {this.herbaty = data});
+    DataAccess.getKraje().then(data => {this.kraje = data});
+    
   },
 };
 </script>

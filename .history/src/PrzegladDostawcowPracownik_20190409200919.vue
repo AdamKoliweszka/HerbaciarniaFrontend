@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <MenuPracownik />
-    <div v-for="Provider in providers" v-bind:key="'Provider' + Provider.id_provider">
+    <div v-for="Dostawca in dostawcy" v-bind:key="'Dostawca' + Dostawca.id_dostawcy">
         <div>
-        {{Provider.name}} {{Provider.surname}}
+        {{Dostawca.imie}} {{Dostawca.nazwisko}}
         </div>
         <div>
           Adres:<br>
-          {{Provider.street}} {{Provider.city}}
+          {{Dostawca.ulica}} {{Dostawca.miejscowosc}}
         </div>
         <div>
-          Konto bankowe: {{Provider.accountNumber}}
+          Konto bankowe: {{Dostawca.numerKonta}}
         </div>
       <div>
-        <router-link :to="{ path:'pracownik/dostawcy/'+Provider.id_provider }">Edytuj</router-link>
+        <router-link :to="{ path:'pracownik/dostawcy/'+Dostawca.id_dostawcy }">Edytuj</router-link>
       </div>
     </div>
   </div>
@@ -28,14 +28,15 @@ export default {
     MenuPracownik
   },
   methods: {
+    
   },
   data: function() {
     return {
-      providers: []
+      dostawcy: []
     };
   },
   mounted() {
-    DataAccess.getProviders().then(data => {this.providers = data});
+    DataAccess.getDostawcy().then(data => {this.dostawcy = data});
   },
 };
 </script>

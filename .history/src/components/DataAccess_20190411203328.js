@@ -201,7 +201,7 @@ var DataAccess = {
             }
         });
     },
-    getProviders() {
+    getDostawcy() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Dostawcy")
             .then(response => {

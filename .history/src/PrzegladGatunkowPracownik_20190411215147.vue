@@ -62,10 +62,12 @@
 <script>
 import DataAccess from "@/components/DataAccess.js";
 import MenuPracownik from "@/components/MenuPracownik.vue";
+import EdytowanieGatunkow from "@/components/EdytowanieGatunkow.vue";
 export default {
   name: "PanelPracownika",
   components: {
-    MenuPracownik
+    MenuPracownik,
+    EdytowanieGatunkow
   },
   mounted(){
     DataAccess.getSpecies().then(data => {
@@ -88,19 +90,19 @@ export default {
   },
   methods: {
     aktualizacjaNazwyGatunku() {
-      this.newNameOfSpecies = this.selectedSpecies.name;
+      this.nowaNazwaGatunku = this.selectedGatunek.nazwa_gatunku;
       this.komunikatEdycjaGatunku = "komunikatBleduNiewidoczny";
     },
     deleteSpecies() {
-      if (this.selectedSpecies == null) {
+      if (this.selectedGatunek == null) {
         this.komunikatEdycjaGatunku = "komunikatGatunekPusty";
-      } else if (this.selectedSpecies.id_species > 1) {
-        DataAccess.deleteSpecies(this.selectedSpecies.id_species).then(() => {
-          DataAccess.getSpecies().then(data => {
-            this.species = data;
+      } else if (this.selectedGatunek.id_gatunku > 1) {
+        DataAccess.usuwanieGatunku(this.selectedGatunek.id_gatunku).then(() => {
+          DataAccess.getGatunki().then(data => {
+            this.gatunki = data;
           });
         });
-        this.newNameOfSpecies = "";
+        this.nowaNazwaGatunku = "";
         this.komunikatEdycjaGatunku = "komunikatGatunekUsuniety";
       } else {
         this.komunikatEdycjaGatunku = "komunikatGatunekNiezdefiniowany";

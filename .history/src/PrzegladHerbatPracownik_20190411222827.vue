@@ -3,9 +3,9 @@
     <MenuPracownik />
     <div>
       <FiltracjaPracownik
-        :kraje="countries"
-        :gatunki="species"
-        @click="search"
+        :kraje="kraje"
+        :gatunki="gatunki"
+        @click="szukaj"
         class="LewyPasekWyszukiwanieHerbat"
       />
       <ListaHerbatPracownik :herbaty="tea" class="PrawyPasekWyszukiwanieHerbat"/>

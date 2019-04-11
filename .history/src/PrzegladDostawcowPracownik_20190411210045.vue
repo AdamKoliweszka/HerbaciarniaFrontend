@@ -13,7 +13,7 @@
           Konto bankowe: {{Provider.accountNumber}}
         </div>
       <div>
-        <router-link :to="{ path:'pracownik/dostawcy/'+Provider.id_provider }">Edytuj</router-link>
+        <router-link :to="{ path:'pracownik/dostawcy/'+Dostawca.id_dostawcy }">Edytuj</router-link>
       </div>
     </div>
   </div>
@@ -28,14 +28,15 @@ export default {
     MenuPracownik
   },
   methods: {
+    
   },
   data: function() {
     return {
-      providers: []
+      dostawcy: []
     };
   },
   mounted() {
-    DataAccess.getProviders().then(data => {this.providers = data});
+    DataAccess.getDostawcy().then(data => {this.dostawcy = data});
   },
 };
 </script>

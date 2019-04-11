@@ -5,19 +5,19 @@
       <div class="EdycjaContainerItem">
         <p>Edytowanie gatunku:</p>
         <select
-          v-model="selectedSpecies"
+          v-model="selectedGatunek"
           @change="aktualizacjaNazwyGatunku()"
           class="combo_EdytowanieGatunkow"
         >
           <option
-            v-for="TeaSpecies in species"
-            :value="TeaSpecies"
-            v-bind:key="'TeaSpecies' + TeaSpecies.name"
-          >{{TeaSpecies.name}}</option>
+            v-for="Gatunek in gatunki"
+            :value="Gatunek"
+            v-bind:key="'gatunek' + Gatunek.nazwa_gatunku"
+          >{{Gatunek.nazwa_gatunku}}</option>
         </select>
         <input type="button" class="button_EdytowanieGatunkow" value="Usuń" @click="usunGatunek">
         <br>Nazwa gatunku:
-        <input type="text" v-model="newNameOfSpecies">
+        <input type="text" v-model="nowaNazwaGatunku">
         <input
           type="button"
           class="button_EdytowanieGatunkow"
@@ -27,7 +27,7 @@
       </div>
       <div class="EdycjaContainerItem">
         <p>Dodawanie gatunku:</p>Nazwa gatunku:
-        <input type="text" v-model="nameOfNewSpecies">
+        <input type="text" v-model="nazwaNowegoGatunku">
         <input
           type="button"
           class="button_EdytowanieGatunkow"
@@ -62,74 +62,76 @@
 <script>
 import DataAccess from "@/components/DataAccess.js";
 import MenuPracownik from "@/components/MenuPracownik.vue";
+import EdytowanieGatunkow from "@/components/EdytowanieGatunkow.vue";
 export default {
   name: "PanelPracownika",
   components: {
-    MenuPracownik
+    MenuPracownik,
+    EdytowanieGatunkow
   },
   mounted(){
-    DataAccess.getSpecies().then(data => {
-      this.species = data;
+    DataAccess.getGatunki().then(data => {
+      this.gatunki = data;
     });
   },
   data: function() {
     return {
-      species: [],
-      selectedSpecies: null,
-      newNameOfSpecies: "",
-      nameOfNewSpecies: "",
+      gatunki: [],
+      selectedGatunek: null,
+      nowaNazwaGatunku: "",
+      nazwaNowegoGatunku: "",
       komunikatEdycjaGatunku: "",
-      newSpecies: {
-        id_species: 0,
-        name: ""
+      nowyGatunek: {
+        id_gatunku: 0,
+        nazwa_gatunku: ""
       },
       adresIPPort: "10.211.55.5:8086"
     };
   },
   methods: {
     aktualizacjaNazwyGatunku() {
-      this.newNameOfSpecies = this.selectedSpecies.name;
+      this.nowaNazwaGatunku = this.selectedGatunek.nazwa_gatunku;
       this.komunikatEdycjaGatunku = "komunikatBleduNiewidoczny";
     },
-    deleteSpecies() {
-      if (this.selectedSpecies == null) {
+    usunGatunek() {
+      if (this.selectedGatunek == null) {
         this.komunikatEdycjaGatunku = "komunikatGatunekPusty";
-      } else if (this.selectedSpecies.id_species > 1) {
-        DataAccess.deleteSpecies(this.selectedSpecies.id_species).then(() => {
-          DataAccess.getSpecies().then(data => {
-            this.species = data;
+      } else if (this.selectedGatunek.id_gatunku > 1) {
+        DataAccess.usuwanieGatunku(this.selectedGatunek.id_gatunku).then(() => {
+          DataAccess.getGatunki().then(data => {
+            this.gatunki = data;
           });
         });
-        this.newNameOfSpecies = "";
+        this.nowaNazwaGatunku = "";
         this.komunikatEdycjaGatunku = "komunikatGatunekUsuniety";
       } else {
         this.komunikatEdycjaGatunku = "komunikatGatunekNiezdefiniowany";
       }
     },
-    updateSpecies() {
-      if (this.selectedSpecies == null) {
+    aktualizacjaGatunku() {
+      if (this.selectedGatunek == null) {
         this.komunikatEdycjaGatunku = "komunikatGatunekPusty";
-      } else if (this.selectedSpecies.id_species > 1) {
-        this.selectedSpecies.name = this.newNameOfSpecies;
-        DataAccess.updateSpecies(this.selectedSpecies).then(() => {
-          DataAccess.getSpecies().then(data => {
-            this.species = data;
+      } else if (this.selectedGatunek.id_gatunku > 1) {
+        this.selectedGatunek.nazwa_gatunku = this.nowaNazwaGatunku;
+        DataAccess.aktualizacjaGatunku(this.selectedGatunek).then(() => {
+          DataAccess.getGatunki().then(data => {
+            this.gatunki = data;
           });
         });
-        this.newNameOfSpecies = "";
+        this.nowaNazwaGatunku = "";
         this.komunikatEdycjaGatunku = "komunikatGatunekZmieniony";
       } else {
         this.komunikatEdycjaGatunku = "komunikatGatunekNiezdefiniowany";
       }
     },
-    addSpecies() {
-      this.newSpecies.name = this.nameOfNewSpecies;
-      DataAccess.addSpecies(this.newSpecies).then(() => {
-        DataAccess.getSpecies().then(data => {
-          this.species = data;
+    dodawanieGatunku() {
+      this.nowyGatunek.nazwa_gatunku = this.nazwaNowegoGatunku;
+      DataAccess.dodawanieGatunku(this.nowyGatunek).then(() => {
+        DataAccess.getGatunki().then(data => {
+          this.gatunki = data;
         });
       });
-      this.nameOfNewSpecies = "";
+      this.nazwaNowegoGatunku = "";
       this.komunikatEdycjaGatunku = "komunikatGatunekDodany";
     }
   }

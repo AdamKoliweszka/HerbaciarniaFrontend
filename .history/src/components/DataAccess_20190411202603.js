@@ -176,32 +176,32 @@ var DataAccess = {
             }
         );
     },
-    updateCountry(country) {
+    aktualizacjaKraju(kraj) {
         return axios.put(
             "http://" + this.adresIPPort + "/myapp/KrajePochodzenia",
-            country, {
+            kraj, {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: this.uzytkownik.username,
+                    password: this.uzytkownik.password
                 }
             }
         );
     },
-    deleteCountry: function (id) {
+    usuwanieKraju: function (id) {
         var link = "http://" + this.adresIPPort + "/myapp/KrajePochodzenia/";
         link += id;
         return axios.delete(link, {
             params: null,
             withCredentials: true,
             auth: {
-                username: this.user.username,
-                password: this.user.password
+                username: this.uzytkownik.username,
+                password: this.uzytkownik.password
             }
         });
     },
-    getProviders() {
+    getDostawcy() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Dostawcy")
             .then(response => {

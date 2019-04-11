@@ -62,10 +62,12 @@
 <script>
 import DataAccess from "@/components/DataAccess.js";
 import MenuPracownik from "@/components/MenuPracownik.vue";
+import EdytowanieGatunkow from "@/components/EdytowanieGatunkow.vue";
 export default {
   name: "PanelPracownika",
   components: {
-    MenuPracownik
+    MenuPracownik,
+    EdytowanieGatunkow
   },
   mounted(){
     DataAccess.getSpecies().then(data => {
@@ -100,7 +102,7 @@ export default {
             this.species = data;
           });
         });
-        this.newNameOfSpecies = "";
+        this.nowaNazwaGatunku = "";
         this.komunikatEdycjaGatunku = "komunikatGatunekUsuniety";
       } else {
         this.komunikatEdycjaGatunku = "komunikatGatunekNiezdefiniowany";

@@ -21,20 +21,20 @@
       Gatunek:
       <select v-model="tea.tea_species" class="combo_EdytowanieGatunkow">
         <option
-          v-for="TeaSpecies in species"
-          :value="TeaSpecies"
-          v-bind:key="'TeaSpecies' + TeaSpecies.name"
-        >{{TeaSpecies.name}}</option>
+          v-for="Gatunek in gatunki"
+          :value="Gatunek"
+          v-bind:key="'gatunek' + Gatunek.nazwa_gatunku"
+        >{{Gatunek.nazwa_gatunku}}</option>
       </select>
     </div>
     <div>
       Kraj pochodzenia:
-      <select v-model="tea.country_of_origin" class="combo_EdytowanieKrajow">
+      <select v-model="herbata.krajPochodzenia" class="combo_EdytowanieKrajow">
         <option
-          v-for="country in countries"
-          :value="country"
-          v-bind:key="'country' + country.name"
-        >{{country.name}}</option>
+          v-for="Kraj in kraje"
+          :value="Kraj"
+          v-bind:key="'kraj' + Kraj.nazwa_kraju"
+        >{{Kraj.nazwa_kraju}}</option>
       </select>
     </div>
   <div>
@@ -49,11 +49,11 @@ import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "DodawanieHerbatyPracownik",
   mounted() {
-    DataAccess.getSpecies().then(data => {
-      this.species = data;
+    DataAccess.getGatunki().then(data => {
+      this.gatunki = data;
     });
-    DataAccess.getCountries().then(data => {
-      this.countries = data;
+    DataAccess.getKraje().then(data => {
+      this.kraje = data;
     });
   },
   components: {
@@ -61,23 +61,24 @@ export default {
   },
   data: function() {
     return {
-      tea: {
-        id_tea: 0,
-        name: "",
-        description: "",
-        price_of_selling: 1,
-        price_of_delivery: 0,
-        available_quantity: 0,
-        tea_species: null,
-        country_of_origin: null
+      herbata: {
+        id_herbaty: 0,
+        nazwa_herbaty: "",
+        opis: "",
+        cenaSprzedazy: 1,
+        cenaDostawy: 0,
+        iloscDostepna: 0,
+        gatunekHerbaty: null,
+        krajPochodzenia: null
       },
-      species: null,
-      countries: null
+      gatunki: null,
+      kraje: null
     };
   },
   methods: {
     dodawanie(){
-      DataAccess.addTea(this.tea).then(() => {
+      DataAccess.dodawanieHerbaty(this.herbata).then(() => {
+          
         });
     }
   }

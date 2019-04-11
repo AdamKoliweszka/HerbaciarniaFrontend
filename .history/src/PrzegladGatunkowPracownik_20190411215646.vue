@@ -62,10 +62,12 @@
 <script>
 import DataAccess from "@/components/DataAccess.js";
 import MenuPracownik from "@/components/MenuPracownik.vue";
+import EdytowanieGatunkow from "@/components/EdytowanieGatunkow.vue";
 export default {
   name: "PanelPracownika",
   components: {
-    MenuPracownik
+    MenuPracownik,
+    EdytowanieGatunkow
   },
   mounted(){
     DataAccess.getSpecies().then(data => {

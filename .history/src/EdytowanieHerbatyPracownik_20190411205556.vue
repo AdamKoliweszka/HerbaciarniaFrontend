@@ -90,7 +90,7 @@ export default {
         country_of_origin: null
       },
       species: null,
-      countries: null,
+      countries: null
       isEdited: false,
       isError: false
     };
@@ -98,7 +98,7 @@ export default {
   methods: {
     edit() {
       if (!this.isEdited) {
-        DataAccess.updateTea(this.tea).then(() => {
+        DataAccess.aktualizacjaHerbaty(this.herbata).then(() => {
           this.isEdited = true;
           this.isError = false;
           this.clear();
@@ -108,7 +108,7 @@ export default {
       }
     },
     clear() {
-      this.tea= null;
+      this.herbata = null;
     }
   }
 };

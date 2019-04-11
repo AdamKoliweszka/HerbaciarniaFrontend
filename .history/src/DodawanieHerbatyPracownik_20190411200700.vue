@@ -49,11 +49,11 @@ import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "DodawanieHerbatyPracownik",
   mounted() {
-    DataAccess.getSpecies().then(data => {
-      this.species = data;
+    DataAccess.getGatunki().then(data => {
+      this.gatunki = data;
     });
-    DataAccess.getCountries().then(data => {
-      this.countries = data;
+    DataAccess.getKraje().then(data => {
+      this.kraje = data;
     });
   },
   components: {
@@ -71,13 +71,14 @@ export default {
         tea_species: null,
         country_of_origin: null
       },
-      species: null,
-      countries: null
+      gatunki: null,
+      kraje: null
     };
   },
   methods: {
     dodawanie(){
-      DataAccess.addTea(this.tea).then(() => {
+      DataAccess.dodawanieHerbaty(this.herbata).then(() => {
+          
         });
     }
   }

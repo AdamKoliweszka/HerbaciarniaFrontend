@@ -108,7 +108,7 @@ export default {
       }
     },
     clear() {
-      this.tea= null;
+      this.herbata = null;
     }
   }
 };
