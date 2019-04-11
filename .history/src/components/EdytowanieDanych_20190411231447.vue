@@ -84,10 +84,10 @@ export default {
   data: function() {
     return {
       argument: {
-        species: [],
-        countries: [],
-        priceFrom: 0,
-        priceTo: 10000
+        gatunki: [],
+        kraje: [],
+        cenaOd: 0,
+        cenaDo: 10000
       }
     };
   },

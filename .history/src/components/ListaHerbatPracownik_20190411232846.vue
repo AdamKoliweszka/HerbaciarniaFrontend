@@ -11,10 +11,7 @@
           <br>
           Cena: {{Tea.price_of_selling}}
           Ilosc: {{Tea.avaible_quantity}}
-          <input
-            type="button"
-            value="Kup"
-          >
+          <router-link class="itemMenu" :to="{ path:'pracownik/tea/'+Tea.id_tea }">Edytuj</router-link>
         </div>
       </div>
     </div>
@@ -31,5 +28,11 @@ export default {
 
 
 <style scoped>
-
+.itemMenu {
+  background-color: green;
+  text-align: center;
+  color: white;
+  display: block;
+  text-decoration: none;
+}
 </style>

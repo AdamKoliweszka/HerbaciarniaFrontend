@@ -6,15 +6,12 @@
           <h1>{{Tea.name}}</h1>
           Opis: {{Tea.opis}}
           <br>
-          Kraj pochodzenia: {{Tea.country_of_origin.name}}
+          Kraj pochodzenia: {{Tea.country_of_origin.nazwa_kraju}}
           Gatunek: {{Tea.tea_species.name}}
           <br>
           Cena: {{Tea.price_of_selling}}
           Ilosc: {{Tea.avaible_quantity}}
-          <input
-            type="button"
-            value="Kup"
-          >
+          <router-link class="itemMenu" :to="{ path:'pracownik/tea/'+Tea.id_tea }">Edytuj</router-link>
         </div>
       </div>
     </div>
@@ -31,5 +28,11 @@ export default {
 
 
 <style scoped>
-
+.itemMenu {
+  background-color: green;
+  text-align: center;
+  color: white;
+  display: block;
+  text-decoration: none;
+}
 </style>

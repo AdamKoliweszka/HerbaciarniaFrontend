@@ -18,7 +18,7 @@
     </div>
 
     <div class="ListaFiltracja">
-      Kraje pochodzenia herbaty:
+      CountryOfOrigine pochodzenia herbaty:
       <div v-for="CountryOfOrigin in countries" v-bind:key="'CountryOfOrigin' + CountryOfOrigin.name">
         <input type="checkbox" :value="CountryOfOrigin" v-model="argument.countries">
         <label>{{CountryOfOrigin.name}}</label>

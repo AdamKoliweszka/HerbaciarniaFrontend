@@ -19,13 +19,13 @@
 
     <div class="ListaFiltracja">
       Kraje pochodzenia herbaty:
-      <div v-for="CountryOfOrigin in countries" v-bind:key="'CountryOfOrigin' + CountryOfOrigin.name">
-        <input type="checkbox" :value="CountryOfOrigin" v-model="argument.countries">
-        <label>{{CountryOfOrigin.name}}</label>
+      <div v-for="Kraj in kraje" v-bind:key="'kraj' + Kraj.nazwa_kraju">
+        <input type="checkbox" :value="Kraj" v-model="argument.kraje">
+        <label>{{Kraj.nazwa_kraju}}</label>
       </div>
     </div>
 
-  <div v-if="isEmployee" class="ItemFiltracja">
+  <div v-if="czyPracownik" class="ItemFiltracja">
     <label><input type="radio" name="Dostepnosc" checked="true">Wszystkie</label>
     <label><input type="radio" name="Dostepnosc">Dostepne</label>
     <label><input type="radio" name="Dostepnosc">Niedostepne</label>
@@ -42,17 +42,17 @@
 export default {
   name: "FiltracjaKlient",
   props: {
-    countries: null,
-    species: null,
-    isEmployee: Boolean
+    kraje: null,
+    gatunki: null,
+    czyPracownik: Boolean
   },
   data: function() {
     return {
       argument: {
-        species: [],
-        countries: [],
-        priceFor: 0,
-        priceTo: 10000
+        gatunki: [],
+        kraje: [],
+        cenaOd: 0,
+        cenaDo: 10000
       }
     };
   },
@@ -66,11 +66,11 @@ export default {
         argument = JSON.parse(undoStates.pop());
       }
 
-      if (argument.countries.length == 0) {
-        argument.countries = this.countries;
+      if (argument.kraje.length == 0) {
+        argument.kraje = this.kraje;
       }
-      if (argument.species.length == 0) {
-        argument.species = this.species;
+      if (argument.gatunki.length == 0) {
+        argument.gatunki = this.gatunki;
       }
       this.$emit("click", argument);
     }

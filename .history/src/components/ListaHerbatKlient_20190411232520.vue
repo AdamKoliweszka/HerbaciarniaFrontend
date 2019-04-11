@@ -1,16 +1,16 @@
 <template>
   <div id="KolekcjaHerbat">
-      <div v-for="Tea in tea" v-bind:key="'Tea' + Tea.name">
+      <div v-for="Herbata in tea" v-bind:key="'herbata' + Herbata.name">
         <div></div>
         <div>
-          <h1>{{Tea.name}}</h1>
-          Opis: {{Tea.opis}}
+          <h1>{{Herbata.name}}</h1>
+          Opis: {{Herbata.opis}}
           <br>
-          Kraj pochodzenia: {{Tea.country_of_origin.name}}
-          Gatunek: {{Tea.tea_species.name}}
+          Kraj pochodzenia: {{Herbata.krajPochodzenia.name}}
+          Gatunek: {{Herbata.gatunektea.name}}
           <br>
-          Cena: {{Tea.price_of_selling}}
-          Ilosc: {{Tea.avaible_quantity}}
+          Cena: {{Herbata.cenaSprzedazy}}
+          Ilosc: {{Herbata.iloscDostepna}}
           <input
             type="button"
             value="Kup"

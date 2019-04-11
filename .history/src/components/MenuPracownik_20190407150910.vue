@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <div class="KontenerMenu">
-      <input v-for="item in listaItemow" :key="item.nazwa" type="button" @click="$emit('click',item)" :value="item.nazwa" class="itemMenu">
-      
+      <router-link class="itemMenu" to="/pracownik">Edytowanie herbat</router-link>
+      <router-link class="itemMenu" to="/pracownik/dodawanieHerbaty">Dodawanie herbaty</router-link>
+      <router-link class="itemMenu" to="/pracownik/gatunki">Edytowanie gatunków</router-link>
+      <router-link class="itemMenu" to="/pracownik/kraje">Edytowanie krajów</router-link>
+      <router-link class="itemMenu" to="/pracownik/dostawcy">Lista dostawców</router-link>
     </div>
     <div class="PasekOdstepuMenu"></div>
   </div>
@@ -11,19 +14,7 @@
 <script>
 export default {
   name: "MenuPracownik",
-  props: {
-    listaItemow: Array
-  },
-  data: function() {
-    return {
-      wybor: 1
-    };
-  },
-  methods: {
-    click(wybor) {
-      this.wybor = wybor;
-    }
-  }
+  
 };
 </script>
 
@@ -36,14 +27,15 @@ export default {
   border-color: darkgreen;
   color: white;
   display: block;
+  text-decoration: none;
 }
 .itemMenu:hover {
-  padding-top: 40px;
+  padding-top: 5vh;
 }
 
 .KontenerMenu {
   width: 100%;
-  height: 40px;
+  height: 5vh;
   position: fixed;
   background-color: green;
   display: flex;
@@ -52,6 +44,6 @@ export default {
 }
 .PasekOdstepuMenu {
   width: 100%;
-  height: 40px;
+  height: 5vh;
 }
 </style>

@@ -54,27 +54,28 @@ export default {
   props: {
     isEmployee: Boolean,
     Customer: {
-      id_customer: Number,
+      id_Customera: Number,
       name: String,
       surname: String,
-      city: String,
-      street: String,
-      date_of_deleting_account: String,
-      user: {
-        id_user: Number,
+      miejscowosc: String,
+      ulica: String,
+      dataUsunieciaKonta: String,
+      uzytkownik: {
+        id_uzytkownika: Number,
         login: String,
-        password: String
+        haslo: String,
+        salt: String
       }
     },
 
     Employee: {
-      id_employee: Number,
+      id_Employeea: Number,
       name: String,
       surname: String,
-      date_of_employing: Date,
-      date_of_dismis: Date,
-      user: {
-        id_user: Number,
+      DataZatrudnienia: Date,
+      DataZwolnienia: Date,
+      uzytkownik: {
+        id_uzytkownika: Number,
         login: String,
         haslo: String,
         salt: String
@@ -84,10 +85,10 @@ export default {
   data: function() {
     return {
       argument: {
-        species: [],
-        countries: [],
-        priceFrom: 0,
-        priceTo: 10000
+        gatunki: [],
+        kraje: [],
+        cenaOd: 0,
+        cenaDo: 10000
       }
     };
   },

@@ -9,8 +9,8 @@
           Kraj pochodzenia: {{Tea.country_of_origin.name}}
           Gatunek: {{Tea.tea_species.name}}
           <br>
-          Cena: {{Tea.price_of_selling}}
-          Ilosc: {{Tea.avaible_quantity}}
+          Cena: {{Tea.priceOfSelling}}
+          Ilosc: {{Tea.avaibleQuantity}}
           <input
             type="button"
             value="Kup"

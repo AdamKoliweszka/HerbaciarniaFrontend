@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <WyszukiwanieHerbat v-if="wybor.nazwa=='Przeglad herbat'" :czyPracownik="false"/>
     <EdytowanieDanych
       v-if="wybor.nazwa=='Edytuj dane'"
       :Klient="AktualnyKlient"
@@ -12,10 +13,13 @@
 <script>
 
 import Logowanie from "@/components/Logowanie.vue";
+import WyszukiwanieHerbat from "@/components/WyszukiwanieHerbat.vue";
 import EdytowanieDanych from "@/components/EdytowanieDanych.vue";
 export default {
   name: "app",
   components: {
+    WyszukiwanieHerbat,
+    GorneMenu,
     EdytowanieDanych,
     Logowanie
   },

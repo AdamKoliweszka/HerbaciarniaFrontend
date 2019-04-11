@@ -4,7 +4,7 @@
     <div>
       <FiltracjaPracownik
         :countries="countries"
-        :species="species"
+        :gatunki="species"
         @click="search"
         class="LewyPasekWyszukiwanieHerbat"
       />

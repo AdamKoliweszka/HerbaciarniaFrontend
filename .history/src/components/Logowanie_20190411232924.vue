@@ -21,9 +21,10 @@ export default {
   data: function() {
     return {
       uzytkownik: {
-        id_user: 0,
+        id_uzytkownika: 0,
         login: "",
-        password: ""
+        haslo: "",
+        salt: ""
       }
     };
   },

@@ -11,23 +11,24 @@
 
     <div class="ListaFiltracja">
       Gatunki herbaty:
-      <div v-for="TeaSpecies in species" v-bind:key="'TeaSpecies' + TeaSpecies.name">
-        <input type="checkbox" :value="TeaSpecies" v-model="argument.species">
-        <label>{{TeaSpecies.name}}</label>
+      <div v-for="Species in species" v-bind:key="'Species' + Species.name">
+        <input type="checkbox" :value="Species" v-model="argument.species">
+        <label>{{Species.name}}</label>
       </div>
     </div>
 
     <div class="ListaFiltracja">
       Kraje pochodzenia herbaty:
       <div v-for="CountryOfOrigin in countries" v-bind:key="'CountryOfOrigin' + CountryOfOrigin.name">
-        <input type="checkbox" :value="CountryOfOrigin" v-model="argument.countries">
-        <label>{{CountryOfOrigin.name}}</label>
+        <input type="checkbox" :value="Kraj" v-model="argument.kraje">
+        <label>{{Kraj.nazwa_kraju}}</label>
       </div>
     </div>
 
-  <div class="ItemFiltracja">
-    <label><input type="checkbox" v-model="argument.isEnable">Dostepne</label>
-    <label><input type="checkbox" v-model="argument.isUnavaible">Niedostepne</label>
+  <div v-if="czyPracownik" class="ItemFiltracja">
+    <label><input type="radio" name="Dostepnosc" checked="true">Wszystkie</label>
+    <label><input type="radio" name="Dostepnosc">Dostepne</label>
+    <label><input type="radio" name="Dostepnosc">Niedostepne</label>
     </div>
 
     <div class="ItemFiltracja">
@@ -41,37 +42,21 @@
 export default {
   name: "FiltracjaKlient",
   props: {
-    countries: null,
-    species: null
+    kraje: null,
+    gatunki: null,
+    czyPracownik: Boolean
   },
   data: function() {
     return {
       argument: {
-        species: [],
-        countries: [],
-        priceFor: 0,
-        priceTo: 10000,
-        isEnable: null,
-        isUnavaible: null
+        gatunki: [],
+        kraje: [],
+        cenaOd: 0,
+        cenaDo: 10000
       }
     };
   },
   methods: {
-    selectWszystkie()
-    {
-      this.isEnable = true;
-      this.isUnavaible = true;
-    },
-    selectDostepne()
-    {
-      this.isEnable = true;
-      this.isUnavaible = false;
-    },
-    selectNiedostepne()
-    {
-      this.isEnable = false;
-      this.isUnavaible = true;
-    },
     clickEvent() {
       const undoStates = [];
       var argument;
@@ -81,11 +66,11 @@ export default {
         argument = JSON.parse(undoStates.pop());
       }
 
-      if (argument.countries.length == 0) {
-        argument.countries = this.countries;
+      if (argument.kraje.length == 0) {
+        argument.kraje = this.kraje;
       }
-      if (argument.species.length == 0) {
-        argument.species = this.species;
+      if (argument.gatunki.length == 0) {
+        argument.gatunki = this.gatunki;
       }
       this.$emit("click", argument);
     }

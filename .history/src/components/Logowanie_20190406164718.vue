@@ -3,12 +3,12 @@
     <div class="GlownyKontentEdytowanieDanych">
       <div>
         Login:
-        <input type:text v-model="user.login">
+        <input type:text v-model="uzytkownik.login">
       </div>
 
       <div>
         Hasło:
-        <input type="password" v-model="user.password">
+        <input type="password" v-model="uzytkownik.haslo">
       </div>
     </div>
   </div>
@@ -21,9 +21,10 @@ export default {
   data: function() {
     return {
       uzytkownik: {
-        id_user: 0,
+        id_uzytkownika: 0,
         login: "",
-        password: ""
+        haslo: "",
+        salt: ""
       }
     };
   },

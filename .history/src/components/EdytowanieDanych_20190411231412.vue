@@ -71,10 +71,10 @@ export default {
       id_employee: Number,
       name: String,
       surname: String,
-      date_of_employing: Date,
-      date_of_dismis: Date,
-      user: {
-        id_user: Number,
+      DataZatrudnienia: Date,
+      DataZwolnienia: Date,
+      uzytkownik: {
+        id_uzytkownika: Number,
         login: String,
         haslo: String,
         salt: String
@@ -84,10 +84,10 @@ export default {
   data: function() {
     return {
       argument: {
-        species: [],
-        countries: [],
-        priceFrom: 0,
-        priceTo: 10000
+        gatunki: [],
+        kraje: [],
+        cenaOd: 0,
+        cenaDo: 10000
       }
     };
   },
