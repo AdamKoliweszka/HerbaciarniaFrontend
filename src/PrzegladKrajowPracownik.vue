@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MenuPracownik/>
+    <MenuForEmployee/>
     <div class="EdycjaContainer">
       <div class="EdycjaContainerItem">
         <p>Edytowanie Kraju:</p>
@@ -56,11 +56,11 @@
 
 <script>
 import DataAccess from "@/components/DataAccess.js";
-import MenuPracownik from "@/components/MenuPracownik.vue";
+import MenuForEmployee from "@/components/MenuForEmployee.vue";
 export default {
   name: "PanelPracownika",
   components: {
-    MenuPracownik
+    MenuForEmployee
   },
   mounted() {
     DataAccess.getCountries().then(data => {

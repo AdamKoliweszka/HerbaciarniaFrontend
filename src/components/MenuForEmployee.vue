@@ -1,25 +1,25 @@
 <template>
   <div id="app">
-    <div class="KontenerMenu">
-      <router-link class="itemMenu" to="/pracownik">Edytowanie herbat</router-link>
+    <div class="Menu">
+      <router-link class="itemMenu" to="/">Edytowanie herbat</router-link>
       <router-link class="itemMenu" to="/pracownik/dodawanieHerbaty">Dodawanie herbaty</router-link>
       <router-link class="itemMenu" to="/pracownik/gatunki">Edytowanie gatunków</router-link>
       <router-link class="itemMenu" to="/pracownik/kraje">Edytowanie krajów</router-link>
       <router-link class="itemMenu" to="/pracownik/dostawcy">Lista dostawców</router-link>
     </div>
-    <div class="PasekOdstepuMenu"></div>
+    <div class="GapBar"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "MenuPracownik",
+  name: "MenuForEmployee",
   
 };
 </script>
 
 
-<style>
+<style scoped>
 .itemMenu {
   background-color: green;
   text-align: center;
@@ -33,17 +33,18 @@ export default {
   padding-top: 5vh;
 }
 
-.KontenerMenu {
-  width: 100%;
+.Menu {
+  width: 100vw;
   height: 5vh;
   position: fixed;
   background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.5vh;
 }
-.PasekOdstepuMenu {
-  width: 100%;
+.GapBar {
+  width: 100vw;
   height: 5vh;
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <MenuPracownik/>
-    <div class="EdycjaContainer">
-      <div class="EdycjaContainerItem">
+    <MenuForEmployee/>
+    <div class="Container">
+      <div class="ContainerItem">
         <p>Edytowanie gatunku:</p>
         <select
           v-model="selectedSpecies"
-          @change="aktualizacjaNazwyGatunku()"
-          class="combo_EdytowanieGatunkow"
+          @change="updateNameOfSpecies()"
+          class="comboBox"
         >
           <option
             v-for="TeaSpecies in species"
@@ -20,17 +20,17 @@
         <input type="text" v-model="newNameOfSpecies">
         <input
           type="button"
-          class="button_EdytowanieGatunkow"
+          class="button"
           value="Zmień nazwe"
           @click="updateSpecies"
         >
       </div>
-      <div class="EdycjaContainerItem">
+      <div class="ContainerItem">
         <p>Dodawanie gatunku:</p>Nazwa gatunku:
         <input type="text" v-model="nameOfNewSpecies">
         <input
           type="button"
-          class="button_EdytowanieGatunkow"
+          class="button"
           value="Dodaj"
           @click="addSpecies"
         >
@@ -61,11 +61,11 @@
 
 <script>
 import DataAccess from "@/components/DataAccess.js";
-import MenuPracownik from "@/components/MenuPracownik.vue";
+import MenuForEmployee from "@/components/MenuForEmployee.vue";
 export default {
   name: "PanelPracownika",
   components: {
-    MenuPracownik
+    MenuForEmployee
   },
   mounted(){
     DataAccess.getSpecies().then(data => {
@@ -87,7 +87,7 @@ export default {
     };
   },
   methods: {
-    aktualizacjaNazwyGatunku() {
+    updateNameOfSpecies() {
       this.newNameOfSpecies = this.selectedSpecies.name;
       this.komunikatEdycjaGatunku = "komunikatBleduNiewidoczny";
     },
@@ -136,31 +136,31 @@ export default {
 };
 </script>
 
-<style>
-.EdycjaContainer {
+<style scoped>
+.Container {
   background-color: yellowgreen;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 5px;
 }
-.EdycjaContainerItem {
+.ContainerItem {
   flex: 1;
   width: 100%;
 }
-.EdycjaContainer p {
+.Container p {
   display: block;
   border-style: none none solid none;
   border-bottom-color: darkgreen;
   color: darkgreen;
 }
-.EdycjaContainer input {
+.Container input {
   padding-right: 20px;
 }
-.button_EdytowanieGatunkow {
+.button {
   margin-left: 10px;
 }
-.combo_EdytowanieGatunkow {
+.comboBox {
   width: 100px;
 }
 

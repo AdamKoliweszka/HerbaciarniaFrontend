@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <MenuPracownik/>
-    <div v-if="tea != null && species != null && countries != null">
+    <MenuForEmployee/>
+    <div v-if="!isAdded">
       <div>
         Nazwa:
         <input type="text" v-model="tea.name">
@@ -24,7 +24,7 @@
           <option
             v-for="TeaSpecies in species"
             :value="TeaSpecies"
-            v-bind:key="'species' + TeaSpecies.name"
+            v-bind:key="'TeaSpecies' + TeaSpecies.name"
           >{{TeaSpecies.name}}</option>
         </select>
       </div>
@@ -32,41 +32,28 @@
         Kraj pochodzenia:
         <select v-model="tea.country_of_origin" class="combo_EdytowanieKrajow">
           <option
-            v-for="CountryOfOrigin in countries"
-            :value="CountryOfOrigin"
-            v-bind:key="'CountryOfOrigin' + CountryOfOrigin.name"
-          >{{CountryOfOrigin.name}}</option>
+            v-for="country in countries"
+            :value="country"
+            v-bind:key="'country' + country.name"
+          >{{country.name}}</option>
         </select>
       </div>
       <div>
-        <input type="button" @click="edit" value="Edytuj">
+        <input type="button" @click="addTea" value="Dodawanie">
       </div>
     </div>
-
-    <div v-if="species == null || countries == null">
-      <p>Brak połączenia z serwerem!</p>
+    <div v-if="isAdded">
+      <p>Herbata została dodana!</p>
     </div>
-
-    <div v-if="isEdited">
-      <p>Herbata została poprawnie edytowana!</p>
-    </div>
-
-    <div v-if="isError">
-      <p>Operacja się nie powiodła!</p>
-    </div>
-
   </div>
 </template>
 
 <script>
-import MenuPracownik from "@/components/MenuPracownik.vue";
+import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
-  name: "EdytowanieHerbatyPracownik",
+  name: "DodawanieHerbatyPracownik",
   mounted() {
-    DataAccess.getAllTeaById(this.$route.params.id).then(data => {
-      this.tea = data;
-    });
     DataAccess.getSpecies().then(data => {
       this.species = data;
     });
@@ -75,7 +62,7 @@ export default {
     });
   },
   components: {
-    MenuPracownik
+    MenuForEmployee
   },
   data: function() {
     return {
@@ -91,24 +78,14 @@ export default {
       },
       species: null,
       countries: null,
-      isEdited: false,
-      isError: false
+      isAdded: false
     };
   },
   methods: {
-    edit() {
-      if (!this.isEdited) {
-        DataAccess.updateTea(this.tea).then(() => {
-          this.isEdited = true;
-          this.isError = false;
-          this.clear();
-        }).catch(() => {
-            this.isError = true;
-        });
-      }
-    },
-    clear() {
-      this.tea= null;
+    addTea() {
+      DataAccess.addTea(this.tea).then(() => {
+        this.isAdded = true;
+      });
     }
   }
 };

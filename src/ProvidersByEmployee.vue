@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MenuPracownik />
+    <MenuForEmployee />
     <div v-for="Provider in providers" v-bind:key="'Provider' + Provider.id_provider">
         <div>
         {{Provider.name}} {{Provider.surname}}
@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import MenuPracownik from "@/components/MenuPracownik.vue";
+import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "PanelPracownika",
   components: {
-    MenuPracownik
+    MenuForEmployee
   },
   methods: {
   },
@@ -41,16 +41,5 @@ export default {
 </script>
 
 <style scoped>
-.LewyPasekWyszukiwanieHerbat {
-  height: 100%;
-  width: 25%;
-  padding: 5px;
-  float: left;
-}
-.PrawyPasekWyszukiwanieHerbat{
-  height: 100%;
-  width: 70%;
-  float: left;
-  padding: 5px;
-}
+
 </style>

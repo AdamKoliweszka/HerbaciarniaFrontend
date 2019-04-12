@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MenuPracownik />
+    <MenuForEmployee />
     <div>
       <FiltracjaPracownik
         :countries="countries"
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import MenuPracownik from "@/components/MenuPracownik.vue";
+import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 import FiltracjaPracownik from "@/components/FiltracjaPracownik.vue";
 import ListaHerbatPracownik from "@/components/ListaHerbatPracownik.vue";
 export default {
   name: "PanelPracownika",
   components: {
-    MenuPracownik,
+    MenuForEmployee,
     FiltracjaPracownik,
     ListaHerbatPracownik
   },
