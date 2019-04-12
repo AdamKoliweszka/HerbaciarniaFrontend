@@ -64,7 +64,7 @@ import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "EdytowanieHerbatyPracownik",
   mounted() {
-    DataAccess.getAllTeeById(this.$route.params.id).then(data => {
+    DataAccess.getAllTeaById(this.$route.params.id).then(data => {
       this.tea = data;
     });
     DataAccess.getSpecies().then(data => {

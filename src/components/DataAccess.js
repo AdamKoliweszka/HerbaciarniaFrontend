@@ -2,8 +2,8 @@ import axios from "axios";
 var DataAccess = {
     adresIPPort: "localhost:8086",
     user: {
-        username: "bill",
-        password: "abc123"
+        username: "Mateusz",
+        password: "Krol"
     },
     getAllTea() {
         return axios
@@ -23,7 +23,7 @@ var DataAccess = {
             });
     },
     getAllTeaById(id) {
-        var link = "http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie/" + id;
+        var link = "http://" + this.adresIPPort + "/myapp/Herbaty/" + id;
         return axios
             .get(link, {
                 params: null,

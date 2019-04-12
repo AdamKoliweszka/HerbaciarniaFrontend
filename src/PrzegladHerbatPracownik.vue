@@ -8,7 +8,7 @@
         @click="search"
         class="LewyPasekWyszukiwanieHerbat"
       />
-      <ListaHerbatPracownik :herbaty="tea" class="PrawyPasekWyszukiwanieHerbat"/>
+      <ListaHerbatPracownik :tea="tea" class="PrawyPasekWyszukiwanieHerbat"/>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     search(argument) {
-      DataAccess.getAllTeaFiltred(argument).then(data => {this.tea = data;console.log(data);});
+      DataAccess.getAllTeaFiltred(argument).then(data => {this.tea = data});
     }
   },
   data: function() {
@@ -38,9 +38,9 @@ export default {
     };
   },
   mounted() {
-    DataAccess.getSpecies().then(data => {this.species = data;console.log(data);});
-    DataAccess.getAllTea().then(data => {this.tea = data;console.log(data);});
-    DataAccess.getCountries().then(data => {this.countries = data;console.log(data);});
+    DataAccess.getSpecies().then(data => {this.species = data;});
+    DataAccess.getAllTea().then(data => {this.tea = data;});
+    DataAccess.getCountries().then(data => {this.countries = data;});
   },
 };
 </script>

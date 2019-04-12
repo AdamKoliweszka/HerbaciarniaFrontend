@@ -26,8 +26,8 @@
     </div>
 
   <div class="ItemFiltracja">
-    <label><input type="checkbox" v-model="argument.isEnable">Dostepne</label>
-    <label><input type="checkbox" v-model="argument.isUnavaible">Niedostepne</label>
+    <label><input type="checkbox" v-model="argument.avaible">Dostepne</label>
+    <label><input type="checkbox" v-model="argument.unavaible">Niedostepne</label>
     </div>
 
     <div class="ItemFiltracja">
@@ -51,26 +51,26 @@ export default {
         countries: [],
         priceFor: 0,
         priceTo: 10000,
-        isEnable: null,
-        isUnavaible: null
+        avaible: true,
+        unavaible: true
       }
     };
   },
   methods: {
     selectWszystkie()
     {
-      this.isEnable = true;
-      this.isUnavaible = true;
+      this.avaible = true;
+      this.unavaible = true;
     },
     selectDostepne()
     {
-      this.isEnable = true;
-      this.isUnavaible = false;
+      this.avaible = true;
+      this.unavaible = false;
     },
     selectNiedostepne()
     {
-      this.isEnable = false;
-      this.isUnavaible = true;
+      this.avaible = false;
+      this.unavaible = true;
     },
     clickEvent() {
       const undoStates = [];

@@ -15,14 +15,14 @@
             v-bind:key="'TeaSpecies' + TeaSpecies.name"
           >{{TeaSpecies.name}}</option>
         </select>
-        <input type="button" class="button_EdytowanieGatunkow" value="Usuń" @click="usunGatunek">
+        <input type="button" class="button_EdytowanieGatunkow" value="Usuń" @click="deleteSpecies">
         <br>Nazwa gatunku:
         <input type="text" v-model="newNameOfSpecies">
         <input
           type="button"
           class="button_EdytowanieGatunkow"
           value="Zmień nazwe"
-          @click="aktualizacjaGatunku"
+          @click="updateSpecies"
         >
       </div>
       <div class="EdycjaContainerItem">
@@ -32,7 +32,7 @@
           type="button"
           class="button_EdytowanieGatunkow"
           value="Dodaj"
-          @click="dodawanieGatunku"
+          @click="addSpecies"
         >
       </div>
       <div
