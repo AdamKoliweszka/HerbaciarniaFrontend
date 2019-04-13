@@ -4,30 +4,30 @@
 
     <div class="CenaFiltracja">
       Od:
-      <input type="text" size="5" v-model="argument.cenaOd">
+      <input type="text" size="5" v-model="argument.priceFor">
       Do:
-      <input type="text" size="5" v-model="argument.cenaDo">
+      <input type="text" size="5" v-model="argument.priceTo">
     </div>
 
     <div class="ListaFiltracja">
       Gatunki herbaty:
-      <div v-for="Gatunek in gatunki" v-bind:key="'gatunek' + Gatunek.nazwa_gatunku">
-        <input type="checkbox" :value="Gatunek" v-model="argument.gatunki">
-        <label>{{Gatunek.nazwa_gatunku}}</label>
+      <div v-for="TeaSpecies in species" v-bind:key="'TeaSpecies' + TeaSpecies.name">
+        <input type="checkbox" :value="TeaSpecies" v-model="argument.species">
+        <label>{{TeaSpecies.name}}</label>
       </div>
     </div>
 
     <div class="ListaFiltracja">
       Kraje pochodzenia herbaty:
-      <div v-for="Kraj in kraje" v-bind:key="'kraj' + Kraj.nazwa_kraju">
-        <input type="checkbox" :value="Kraj" v-model="argument.kraje">
-        <label>{{Kraj.nazwa_kraju}}</label>
+      <div v-for="CountryOfOrigin in countries" v-bind:key="'CountryOfOrigin' + CountryOfOrigin.name">
+        <input type="checkbox" :value="CountryOfOrigin" v-model="argument.countries">
+        <label>{{CountryOfOrigin.name}}</label>
       </div>
     </div>
 
   <div class="ItemFiltracja">
-    <label><input type="checkbox" v-model="argument.czyDostepne">Dostepne</label>
-    <label><input type="checkbox" v-model="argument.czyNiedostepne">Niedostepne</label>
+    <label><input type="checkbox" v-model="argument.avaible">Dostepne</label>
+    <label><input type="checkbox" v-model="argument.unavaible">Niedostepne</label>
     </div>
 
     <div class="ItemFiltracja">
@@ -41,36 +41,36 @@
 export default {
   name: "FiltracjaKlient",
   props: {
-    kraje: null,
-    gatunki: null
+    countries: null,
+    species: null
   },
   data: function() {
     return {
       argument: {
-        gatunki: [],
-        kraje: [],
-        cenaOd: 0,
-        cenaDo: 10000,
-        czyDostepne: null,
-        czyNiedostepne: null
+        species: [],
+        countries: [],
+        priceFor: 0,
+        priceTo: 10000,
+        avaible: true,
+        unavaible: true
       }
     };
   },
   methods: {
     selectWszystkie()
     {
-      this.czyDostepne = true;
-      this.czyNiedostepne = true;
+      this.avaible = true;
+      this.unavaible = true;
     },
     selectDostepne()
     {
-      this.czyDostepne = true;
-      this.czyNiedostepne = false;
+      this.avaible = true;
+      this.unavaible = false;
     },
     selectNiedostepne()
     {
-      this.czyDostepne = false;
-      this.czyNiedostepne = true;
+      this.avaible = false;
+      this.unavaible = true;
     },
     clickEvent() {
       const undoStates = [];
@@ -81,11 +81,11 @@ export default {
         argument = JSON.parse(undoStates.pop());
       }
 
-      if (argument.kraje.length == 0) {
-        argument.kraje = this.kraje;
+      if (argument.countries.length == 0) {
+        argument.countries = this.countries;
       }
-      if (argument.gatunki.length == 0) {
-        argument.gatunki = this.gatunki;
+      if (argument.species.length == 0) {
+        argument.species = this.species;
       }
       this.$emit("click", argument);
     }

@@ -1,18 +1,18 @@
 import axios from "axios";
 var DataAccess = {
     adresIPPort: "localhost:8086",
-    uzytkownik: {
-        username: "bill",
-        password: "abc123"
+    user: {
+        username: "Mateusz",
+        password: "Krol"
     },
-    getWszystkieHerbaty() {
+    getAllTea() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie", {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             })
             .then(response => {
@@ -22,48 +22,48 @@ var DataAccess = {
                 return null;
             });
     },
-    getWszystkieHerbatyById(id) {
-        var link = "http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie/" + id;
+    getAllTeaById(id) {
+        var link = "http://" + this.adresIPPort + "/myapp/Herbaty/" + id;
         return axios
             .get(link, {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             })
             .then(response => {
                 return response.data;
             });
     },
-    dodawanieHerbaty(herbata) {
+    addTea(tea) {
         return axios.post(
             "http://" + this.adresIPPort + "/myapp/Herbaty",
-            herbata, {
+            tea, {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             }
         );
     },
-    aktualizacjaHerbaty(herbata) {
+    updateTea(tea) {
         return axios.put(
             "http://" + this.adresIPPort + "/myapp/Herbaty",
-            herbata, {
+            tea, {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             }
         );
     },
-    getWszystkieHerbatyFiltred(argument) {
+    getAllTeaFiltred(argument) {
         return axios
             .post(
                 "http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie",
@@ -71,8 +71,8 @@ var DataAccess = {
                     params: null,
                     withCredentials: true,
                     auth: {
-                        username: this.uzytkownik.username,
-                        password: this.uzytkownik.password
+                        username: this.user.username,
+                        password: this.user.password
                     }
                 }
             )
@@ -80,14 +80,14 @@ var DataAccess = {
                 return response.data;
             });
     },
-    getDostepneHerbaty() {
+    getAvaibleTea() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Herbaty/Dostepne", {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             })
             .then(response => {
@@ -95,7 +95,7 @@ var DataAccess = {
             });
 
     },
-    getDostepneHerbatyFiltred(argument) {
+    getAvaibleTeaFiltred(argument) {
         return axios
             .post(
                 "http://" + this.adresIPPort + "/myapp/Herbaty/Dostepne",
@@ -105,7 +105,7 @@ var DataAccess = {
                 return response.data;
             });
     },
-    getGatunki() {
+    getSpecies() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/GatunkiHerbaty")
             .then(response => {
@@ -115,45 +115,45 @@ var DataAccess = {
                 return null;
             });
     },
-    dodawanieGatunku(nowyGatunek) {
+    addSpecies(newSpecies) {
         return axios.post(
-            "http://" + this.adresIPPort + "/myapp/GatunkiHerbaty", nowyGatunek,
+            "http://" + this.adresIPPort + "/myapp/GatunkiHerbaty", newSpecies,
             {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             }
         );
     },
-    aktualizacjaGatunku(gatunek) {
+    updateSpecies(species) {
         return axios.put(
             "http://" + this.adresIPPort + "/myapp/GatunkiHerbaty",
-            gatunek, {
+            species, {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             }
         );
     },
-    usuwanieGatunku: function (id) {
+    deleteSpecies: function (id) {
         var link = "http://" + this.adresIPPort + "/myapp/GatunkiHerbaty/";
         link += id;
         return axios.delete(link, {
             params: null,
             withCredentials: true,
             auth: {
-                username: this.uzytkownik.username,
-                password: this.uzytkownik.password
+                username: this.user.username,
+                password: this.user.password
             }
         });
     },
-    getKraje() {
+    getCountries() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/KrajePochodzenia")
             .then(response => {
@@ -163,45 +163,45 @@ var DataAccess = {
                 return null;
             });
     },
-    dodawanieKraju(nowyKraj) {
+    addCountry(newCountry) {
         return axios.post(
-            "http://" + this.adresIPPort + "/myapp/KrajePochodzenia", nowyKraj,
+            "http://" + this.adresIPPort + "/myapp/KrajePochodzenia", newCountry,
             {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             }
         );
     },
-    aktualizacjaKraju(kraj) {
+    updateCountry(country) {
         return axios.put(
             "http://" + this.adresIPPort + "/myapp/KrajePochodzenia",
-            kraj, {
+            country, {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.uzytkownik.username,
-                    password: this.uzytkownik.password
+                    username: this.user.username,
+                    password: this.user.password
                 }
             }
         );
     },
-    usuwanieKraju: function (id) {
+    deleteCountry: function (id) {
         var link = "http://" + this.adresIPPort + "/myapp/KrajePochodzenia/";
         link += id;
         return axios.delete(link, {
             params: null,
             withCredentials: true,
             auth: {
-                username: this.uzytkownik.username,
-                password: this.uzytkownik.password
+                username: this.user.username,
+                password: this.user.password
             }
         });
     },
-    getDostawcy() {
+    getProviders() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Dostawcy")
             .then(response => {
