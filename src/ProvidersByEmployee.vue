@@ -10,7 +10,7 @@
           {{Provider.street}} {{Provider.city}}
         </div>
         <div>
-          Konto bankowe: {{Provider.accountNumber}}
+          Konto bankowe: {{Provider.account_number}}
         </div>
       <div>
         <router-link :to="{ path:'pracownik/dostawcy/'+Provider.id_provider }">Edytuj</router-link>
@@ -23,7 +23,7 @@
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
-  name: "PanelPracownika",
+  name: "ProvidersByEmployee",
   components: {
     MenuForEmployee
   },

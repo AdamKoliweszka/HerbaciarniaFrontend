@@ -2,13 +2,13 @@
   <div id="app">
     <MenuForEmployee />
     <div>
-      <FiltracjaPracownik
+      <FilteringByEmployee
         :countries="countries"
         :species="species"
         @click="search"
-        class="LewyPasekWyszukiwanieHerbat"
+        class="LeftBar"
       />
-      <ListaHerbatPracownik :tea="tea" class="PrawyPasekWyszukiwanieHerbat"/>
+      <ListTeaByEmployee :tea="tea" class="RightBar"/>
     </div>
   </div>
 </template>
@@ -16,14 +16,14 @@
 <script>
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
-import FiltracjaPracownik from "@/components/FiltracjaPracownik.vue";
-import ListaHerbatPracownik from "@/components/ListaHerbatPracownik.vue";
+import FilteringByEmployee from "@/components/FilteringByEmployee.vue";
+import ListTeaByEmployee from "@/components/ListTeaByEmployee.vue";
 export default {
   name: "PanelPracownika",
   components: {
     MenuForEmployee,
-    FiltracjaPracownik,
-    ListaHerbatPracownik
+    FilteringByEmployee,
+    ListTeaByEmployee
   },
   methods: {
     search(argument) {
@@ -46,13 +46,13 @@ export default {
 </script>
 
 <style scoped>
-.LewyPasekWyszukiwanieHerbat {
+.LeftBar {
   height: 100%;
   width: 25%;
   padding: 5px;
   float: left;
 }
-.PrawyPasekWyszukiwanieHerbat{
+.RightBar{
   height: 100%;
   width: 70%;
   float: left;

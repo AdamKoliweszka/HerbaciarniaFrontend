@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div class="EdycjaContainer">
-      <div class="EdycjaContainerItem">
+    <div class="Contents">
+      <div class="ContentsItem">
         <p>Edytowanie Kraju:</p>
         <select
           v-model="selectedCountry"
-          @change="aktualizacjaNazwyKraju()"
-          class="combo_EdytowanieKrajow"
+          @change="updateNameOfCountry()"
+          class="combo"
         >
           <option
             v-for="CountryOfOrigin in countries"
@@ -15,20 +15,20 @@
             v-bind:key="'CountryOfOrigin' + CountryOfOrigin.name"
           >{{CountryOfOrigin.name}}</option>
         </select>
-        <input type="button" class="button_EdytowanieKrajow" value="Usuń" @click="deleteCountry">
+        <input type="button" class="button" value="Usuń" @click="deleteCountry">
         <br>Nazwa Kraju:
         <input type="text" v-model="newNameOfCountry">
         <input
           type="button"
-          class="button_EdytowanieKrajow"
+          class="button"
           value="Zmień nazwe"
           @click="updateCountry"
         >
       </div>
-      <div class="EdycjaContainerItem">
+      <div class="ContentsItem">
         <p>Dodawanie Kraju:</p>Nazwa Kraju:
         <input type="text" v-model="nameOfNewCountry">
-        <input type="button" class="button_EdytowanieKrajow" value="Dodaj" @click="addCountry">
+        <input type="button" class="button" value="Dodaj" @click="addCountry">
       </div>
       <div
         v-if="komunikatEdycjaKraju == 'komunikatKrajNiezdefiniowany'"
@@ -58,7 +58,7 @@
 import DataAccess from "@/components/DataAccess.js";
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
 export default {
-  name: "PanelPracownika",
+  name: "CountriesByEmployee",
   components: {
     MenuForEmployee
   },
@@ -81,7 +81,7 @@ export default {
     };
   },
   methods: {
-    aktualizacjaNazwyKraju() {
+    updateNameOfCountry() {
       this.newNameOfCountry = this.selectedCountry.name;
       this.komunikatEdycjaKraju = "komunikatBleduNiewidoczny";
     },

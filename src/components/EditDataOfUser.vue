@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="GlownyKontentEdytowanieDanych">
+    <div class="Content">
       <p>Edytuj dane personalne</p>
       <div v-if="Customer != null">
         <div>
@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: "EdytowanieDanych",
+  name: "EditDataOfUser",
   props: {
     isEmployee: Boolean,
     Customer: {
@@ -96,11 +96,11 @@ export default {
 </script>
 
 
-<style>
-.GlownyKontentEdytowanieDanych {
+<style scoped>
+.Content {
   padding: 5px;
 }
-.GlownyKontentEdytowanieDanych p {
+.Content p {
   display: block;
   border-style: none none solid none;
   border-bottom-color: darkgreen;
