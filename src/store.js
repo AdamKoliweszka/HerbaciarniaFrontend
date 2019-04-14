@@ -10,5 +10,13 @@ export const store = new Vuex.Store({
             username: "Mateusz",
             password: "Krol"
         }
+    },
+    getters: {
+        username(state){
+            return state.user.username;
+        },
+        password(state){
+            return state.user.password;
+        }
     }
 })
