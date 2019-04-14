@@ -7,11 +7,14 @@ import TeaSpeciesByEmployee from "./TeaSpeciesByEmployee.vue";
 import EditTeaByEmployee from "./EditTeaByEmployee.vue";
 import AddTeaByEmployee from "./AddTeaByEmployee.vue";
 import ProvidersByEmployee from "./ProvidersByEmployee.vue";
+import Login from "./Login.vue";
+import { store } from "./store.js"
 
 Vue.use(VueRouter);
 
 const routes = [
-    {path: "/", component: TeaByEmployee},
+    {path: "/", component: Login},
+    {path: "/pracownik", component: TeaByEmployee},
     {path: "/pracownik/kraje", component: CountriesByEmployee},
     {path: "/pracownik/gatunki", component: TeaSpeciesByEmployee},
     {path: "/pracownik/dostawcy", component: ProvidersByEmployee},
@@ -26,6 +29,7 @@ const router = new VueRouter({
 
 new Vue({
   el: '#app',
+  store,
   router,
   render: h => h(App)
 });

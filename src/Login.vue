@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="GlownyKontentEdytowanieDanych">
+    <div class="Content">
       <div>
         Login:
         <input type:text v-model="user.login">
@@ -10,6 +10,7 @@
         Hasło:
         <input type="password" v-model="user.password">
       </div>
+      {{count}}
     </div>
   </div>
 </template>
@@ -20,20 +21,27 @@ export default {
 
   data: function() {
     return {
-      uzytkownik: {
+      user: {
         id_user: 0,
         login: "",
         password: ""
       }
     };
   },
-  methods: {}
+  computed: {
+    count() {
+      return this.$store.state.user.username;
+    }
+  },
+  methods: {
+
+  }
 };
 </script>
 
 
-<style>
-.GlownyKontentLogowanie {
+<style scoped>
+.Content {
   padding: 5px;
 }
 </style>

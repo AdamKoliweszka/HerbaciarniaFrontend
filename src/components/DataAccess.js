@@ -1,18 +1,16 @@
 import axios from "axios";
+import { store } from "@/store.js"
+
 var DataAccess = {
     adresIPPort: "localhost:8086",
-    user: {
-        username: "Mateusz",
-        password: "Krol"
-    },
     getAllTea() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie", {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             })
             .then(response => {
@@ -29,8 +27,8 @@ var DataAccess = {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             })
             .then(response => {
@@ -44,8 +42,8 @@ var DataAccess = {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             }
         );
@@ -57,8 +55,8 @@ var DataAccess = {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             }
         );
@@ -71,8 +69,8 @@ var DataAccess = {
                     params: null,
                     withCredentials: true,
                     auth: {
-                        username: this.user.username,
-                        password: this.user.password
+                        username: store.state.user.username,
+                        password: store.state.user.password
                     }
                 }
             )
@@ -86,8 +84,8 @@ var DataAccess = {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             })
             .then(response => {
@@ -98,7 +96,7 @@ var DataAccess = {
     getAvaibleTeaFiltred(argument) {
         return axios
             .post(
-                "http://" + this.adresIPPort + "/myapp/Herbaty/Dostepne",
+                "http://" + store.state.adresIPPort + "/myapp/Herbaty/Dostepne",
                 argument
             )
             .then(response => {
@@ -122,8 +120,8 @@ var DataAccess = {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             }
         );
@@ -135,8 +133,8 @@ var DataAccess = {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             }
         );
@@ -148,8 +146,8 @@ var DataAccess = {
             params: null,
             withCredentials: true,
             auth: {
-                username: this.user.username,
-                password: this.user.password
+                username: store.state.user.username,
+                password: store.state.user.password
             }
         });
     },
@@ -170,8 +168,8 @@ var DataAccess = {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             }
         );
@@ -183,8 +181,8 @@ var DataAccess = {
                 params: null,
                 withCredentials: true,
                 auth: {
-                    username: this.user.username,
-                    password: this.user.password
+                    username: store.state.user.username,
+                    password: store.state.user.password
                 }
             }
         );
@@ -196,8 +194,8 @@ var DataAccess = {
             params: null,
             withCredentials: true,
             auth: {
-                username: this.user.username,
-                password: this.user.password
+                username: store.state.user.username,
+                password: store.state.user.password
             }
         });
     },
