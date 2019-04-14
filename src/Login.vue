@@ -3,7 +3,7 @@
     <div class="Content">
       <div>
         Login:
-        <input type:text v-model="user.login">
+        <input type:text v-model="user.username">
       </div>
 
       <div>
@@ -11,6 +11,9 @@
         <input type="password" v-model="user.password">
       </div>
       {{count}}
+      <div>
+        <input type="button" @click="login" value="Zaloguj"/>
+      </div>
     </div>
   </div>
 </template>
@@ -22,8 +25,7 @@ export default {
   data: function() {
     return {
       user: {
-        id_user: 0,
-        login: "",
+        username: "",
         password: ""
       }
     };
@@ -34,7 +36,9 @@ export default {
     }
   },
   methods: {
-
+      login(){
+          this.$store.commit('login',this.user);
+      }
   }
 };
 </script>

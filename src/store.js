@@ -18,5 +18,15 @@ export const store = new Vuex.Store({
         password(state){
             return state.user.password;
         }
+    },
+    mutations: {
+        login(state,user)
+        {
+            state.user = user;
+        },
+        logout(state)
+        {
+            state.user = null;
+        }
     }
 })
