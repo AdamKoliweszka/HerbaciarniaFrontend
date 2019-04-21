@@ -1,5 +1,6 @@
 <template>
-  <div id="KolekcjaHerbat">
+  <div>
+  <div id="KolekcjaHerbat" v-if="roleOfUser === 'PRACOWNIK'">
       <div v-for="Tea in tea" v-bind:key="'Tea' + Tea.name">
         <div></div>
         <div>
@@ -11,9 +12,10 @@
           <br>
           Cena: {{Tea.price_of_selling}}
           Ilosc: {{Tea.available_quantity}}
-          <router-link class="itemMenu" :to="{ path:'pracownik/herbaty/'+Tea.id_tea }">Edytuj</router-link>
+          <router-link class="itemMenu" :to="{ path:'/herbaty/'+Tea.id_tea }">Edytuj</router-link>
         </div>
       </div>
+    </div>
     </div>
 </template>
 
@@ -22,6 +24,11 @@ export default {
   name: 'ListaHerbatKlient',
   props: {
     tea: null
+  },
+  computed:{
+  roleOfUser() {
+      return this.$store.getters.roleOfUser;
+    }
   }
 }
 </script>

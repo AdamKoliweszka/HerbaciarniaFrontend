@@ -5,25 +5,123 @@ import TeaByEmployee from "./TeaByEmployee.vue";
 import CountriesByEmployee from "./CountriesByEmployee.vue";
 import TeaSpeciesByEmployee from "./TeaSpeciesByEmployee.vue";
 import EditTeaByEmployee from "./EditTeaByEmployee.vue";
+import EditProviderByEmployee from "./EditProviderByEmployee.vue";
 import AddTeaByEmployee from "./AddTeaByEmployee.vue";
 import ProvidersByEmployee from "./ProvidersByEmployee.vue";
 import Login from "./Login.vue";
+import NotAccess from "./NotAccess.vue";
+import Logout from "./Logout.vue";
+import UserIsLogin from "./UserIsLogin.vue";
+import UserIsLogout from "./UserIsLogout.vue";
+import EditDataOfEmployee from "./EditDataOfEmployee.vue";
 import { store } from "./store.js"
 
 Vue.use(VueRouter);
 
 const routes = [
-    {path: "/", component: Login},
-    {path: "/pracownik", component: TeaByEmployee},
-    {path: "/pracownik/kraje", component: CountriesByEmployee},
-    {path: "/pracownik/gatunki", component: TeaSpeciesByEmployee},
-    {path: "/pracownik/dostawcy", component: ProvidersByEmployee},
-    {path: "/pracownik/herbaty/:id", component: EditTeaByEmployee},
-    {path: "/pracownik/dodawanieHerbaty/", component: AddTeaByEmployee}
+  {
+    path: "/login", get component() {
+      if (store.getters.roleOfUser === "NIEZALOGOWANY") {
+        return Login;
+      } else {
+        return UserIsLogin;
+      }
+    }
+  },
+  {
+    path: "/wyloguj", get component() {
+      if (store.getters.roleOfUser === "NIEZALOGOWANY") {
+        return UserIsLogout;
+      } else {
+        return Logout;
+      }
+    }
+  },
+  {
+    path: "/", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return TeaByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/herbaty", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return TeaByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/kraje", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return CountriesByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/gatunki", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return TeaSpeciesByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/dostawcy", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return ProvidersByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/dostawcy/:id", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return EditProviderByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/herbaty/:id", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return EditTeaByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/dodawanieHerbaty", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return AddTeaByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/edytujDane", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return EditDataOfEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  }
 ];
 const router = new VueRouter({
   routes,
-  mode:"history"
+  mode: "history"
 })
 
 

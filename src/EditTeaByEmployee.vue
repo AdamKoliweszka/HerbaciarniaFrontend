@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div v-if="tea != null && species != null && countries != null">
+    <div v-if="tea.id_tea > 0">
       <div>
         Nazwa:
         <input type="text" v-model="tea.name">
@@ -62,17 +62,20 @@
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
-  name: "EdytowanieHerbatyPracownik",
+  name: "EditTeaByEmployee",
   mounted() {
+    
     DataAccess.getAllTeaById(this.$route.params.id).then(data => {
       this.tea = data;
     });
+    
     DataAccess.getSpecies().then(data => {
       this.species = data;
     });
     DataAccess.getCountries().then(data => {
       this.countries = data;
     });
+    
   },
   components: {
     MenuForEmployee
@@ -108,7 +111,7 @@ export default {
       }
     },
     clear() {
-      this.tea= null;
+      this.tea.id_tea = 0;
     }
   }
 };

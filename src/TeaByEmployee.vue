@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MenuForEmployee />
+    <MenuForEmployee/>
     <div>
       <FilteringByEmployee
         :countries="countries"
@@ -27,7 +27,14 @@ export default {
   },
   methods: {
     search(argument) {
-      DataAccess.getAllTeaFiltred(argument).then(data => {this.tea = data});
+      DataAccess.getAllTeaFiltred(argument).then(data => {
+        this.tea = data;
+      });
+    }
+  },
+  computed: {
+    roleOfUser() {
+      return this.$store.getters.roleOfUser;
     }
   },
   data: function() {
@@ -38,10 +45,18 @@ export default {
     };
   },
   mounted() {
-    DataAccess.getSpecies().then(data => {this.species = data;});
-    DataAccess.getAllTea().then(data => {this.tea = data;});
-    DataAccess.getCountries().then(data => {this.countries = data;});
-  },
+    if (this.$store.getters.roleOfUser == "PRACOWNIK") {
+      DataAccess.getSpecies().then(data => {
+        this.species = data;
+      });
+      DataAccess.getAllTea().then(data => {
+        this.tea = data;
+      });
+      DataAccess.getCountries().then(data => {
+        this.countries = data;
+      });
+    }
+  }
 };
 </script>
 
@@ -52,7 +67,7 @@ export default {
   padding: 5px;
   float: left;
 }
-.RightBar{
+.RightBar {
   height: 100%;
   width: 70%;
   float: left;

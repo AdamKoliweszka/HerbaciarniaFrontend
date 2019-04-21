@@ -1,11 +1,20 @@
 <template>
   <div id="app">
-    <div class="Menu">
-      <router-link class="itemMenu" to="/">Edytowanie herbat</router-link>
-      <router-link class="itemMenu" to="/pracownik/dodawanieHerbaty">Dodawanie herbaty</router-link>
-      <router-link class="itemMenu" to="/pracownik/gatunki">Edytowanie gatunków</router-link>
-      <router-link class="itemMenu" to="/pracownik/kraje">Edytowanie krajów</router-link>
-      <router-link class="itemMenu" to="/pracownik/dostawcy">Lista dostawców</router-link>
+    <div v-if="roleOfUser === 'PRACOWNIK'" id="menuForEmployee" class="Menu">
+      <router-link class="itemMenu" to="/herbaty">Edytowanie herbat</router-link>
+      <router-link class="itemMenu" to="/dodawanieHerbaty">Dodawanie herbaty</router-link>
+      <router-link class="itemMenu" to="/gatunki">Edytowanie gatunków</router-link>
+      <router-link class="itemMenu" to="/kraje">Edytowanie krajów</router-link>
+      <router-link class="itemMenu" to="/dostawcy">Lista dostawców</router-link>
+      <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
+      <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
+    </div>
+    <div v-if="roleOfUser === 'KLIENT'" id="menuForEmployee" class="Menu">
+      <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
+    </div>
+    <div v-if="roleOfUser === 'NIEZALOGOWANY'" id="menuForEmployee" class="Menu">
+      <router-link class="itemMenu" to="/herbaty">Przeglądaj herbaty</router-link>
+      <router-link class="itemMenu" to="/login">Zaloguj</router-link>
     </div>
     <div class="GapBar"></div>
   </div>
@@ -14,7 +23,14 @@
 <script>
 export default {
   name: "MenuForEmployee",
-  
+  computed:{
+    username() {
+      return this.$store.getters.username;
+    },
+    roleOfUser() {
+      return this.$store.getters.roleOfUser;
+    }
+  }
 };
 </script>
 

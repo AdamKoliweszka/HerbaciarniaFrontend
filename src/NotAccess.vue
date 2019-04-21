@@ -1,20 +1,7 @@
 <template>
   <div>
     <MenuForEmployee/>
-    <div class="Content">
-      <div>
-        Login:
-        <input type:text v-model="user.username">
-      </div>
-
-      <div>
-        Hasło:
-        <input type="password" v-model="user.password">
-      </div>
-      <div>
-        <input type="button" @click="login" value="Zaloguj"/>
-      </div>
-    </div>
+    Nie masz dostępu!
   </div>
 </template>
 
@@ -33,11 +20,19 @@ export default {
       }
     };
   },
+  computed: {
+    count() {
+      let user =  this.$store.getters.user;
+      if(user != null){
+        return this.$store.state.user.username;
+      }else{
+        return "";
+      }
+    }
+  },
   methods: {
       login(){
-        this.$store.dispatch('login',this.user).then( () => {
-            this.$router.go();
-        });
+        this.$store.commit('login',this.user);
       }
   }
 };

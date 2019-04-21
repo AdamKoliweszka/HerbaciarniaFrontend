@@ -3,6 +3,21 @@ import { store } from "@/store.js"
 
 var DataAccess = {
     adresIPPort: "localhost:8086",
+    login(user) {
+        return axios.get(
+            "http://" + this.adresIPPort + "/myapp/Login",
+            {
+                params: null,
+                withCredentials: true,
+                auth: {
+                    username: user.username,
+                    password: user.password
+                }
+            }
+        ).then(response => {
+            return response.data;
+        });
+    },
     getAllTea() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie", {
@@ -33,6 +48,8 @@ var DataAccess = {
             })
             .then(response => {
                 return response.data;
+            }).catch(() => {
+                return null;
             });
     },
     addTea(tea) {
@@ -209,6 +226,50 @@ var DataAccess = {
                 return null;
             });
     },
+    getProviderById: function (id) {
+        var link = "http://" + this.adresIPPort + "/myapp/Dostawcy/";
+        link += id;
+        return axios
+            .get(link)
+            .then(response => {
+                return response.data;
+            })
+            .catch(() => {
+                return null;
+            });
+    },
+    updateProvider(provider) {
+        return axios.put(
+            "http://" + this.adresIPPort + "/myapp/Dostawcy",
+            provider, {
+                params: null,
+                withCredentials: true,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
+
+    getDataOfEmployee() {
+        return axios
+            .get("http://" + this.adresIPPort + "/myapp/DanePracownika",
+                {
+                    params: null,
+                    withCredentials: true,
+                    auth: {
+                        username: store.getters.username,
+                        password: store.getters.password
+                    }
+                }
+            ).then(response => {
+                return response.data;
+            })
+            .catch(() => {
+                return null;
+            });
+    }
 }
 export default DataAccess
 //opisanie api serwera

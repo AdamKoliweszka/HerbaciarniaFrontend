@@ -13,7 +13,7 @@
           Konto bankowe: {{Provider.account_number}}
         </div>
       <div>
-        <router-link :to="{ path:'pracownik/dostawcy/'+Provider.id_provider }">Edytuj</router-link>
+        <router-link :to="{ path:'dostawcy/'+Provider.id_provider }">Edytuj</router-link>
       </div>
     </div>
   </div>
