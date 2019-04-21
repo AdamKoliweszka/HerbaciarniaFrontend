@@ -12,15 +12,23 @@
         nazwisko:
         <input type:text v-model="employee.surname">
       </div>
+      <div>
+        <input type="button" value="Edytuj dane" @click="changeData">
+      </div>
     </div>
-    <p>Zmiana hasła</p>
-    <div>
-      Stare hasło:
-      <input type="password" v-model="oldPassword">
-    </div>
-    <div>
-      Nowe hasło:
-      <input type="password" v-model="newPassword">
+    <div class="Content">
+      <p>Zmiana hasła</p>
+      <div>
+        Stare hasło:
+        <input type="password" v-model="oldPassword">
+      </div>
+      <div>
+        Nowe hasło:
+        <input type="password" v-model="newPassword">
+      </div>
+      <div>
+        <input type="button" value="Edytuj hasło" @click="changePassword">
+      </div>
     </div>
   </div>
 </template>
@@ -30,13 +38,11 @@ import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "EditDataOfEmployee",
-  components:{
-      MenuForEmployee
+  components: {
+    MenuForEmployee
   },
-  mounted()
-  {
+  mounted() {
     DataAccess.getDataOfEmployee().then(data => {
-      console.log(data);
       this.employee = data;
     });
   },
@@ -53,7 +59,18 @@ export default {
       newPassword: ""
     };
   },
-  methods: {}
+  methods: {
+    changeData() {
+      DataAccess.updateEmployee(this.employee).then(() => {
+        console.log("Udalo sie!");
+      });
+    },
+    changePassword() {
+      DataAccess.updatePassword(this.oldPassword,this.newPassword).then(() => {
+        console.log("Udalo sie!");
+      });
+    }
+  }
 };
 </script>
 

@@ -45,6 +45,9 @@ export const store = new Vuex.Store({
             state.user.username = " ";
             state.user.password = " ";
             state.roleOfUser = "NIEZALOGOWANY";
+        },
+        changePassword(state,password) {
+            state.user.password = password;
         }
     },
     actions: {

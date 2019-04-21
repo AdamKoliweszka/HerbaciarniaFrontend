@@ -269,7 +269,78 @@ var DataAccess = {
             .catch(() => {
                 return null;
             });
-    }
+    },
+    updateEmployee(employee) {
+        return axios.put(
+            "http://" + this.adresIPPort + "/myapp/Pracownicy",
+            employee, {
+                params: null,
+                withCredentials: true,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
+    updatePassword(oldPassword, newPassword) {
+        var user = {
+            username: store.getters.username,
+            password: newPassword
+        };
+        return axios.put(
+            "http://" + this.adresIPPort + "/myapp/Uzytkownicy",
+            user, {
+                params: null,
+                withCredentials: true,
+                auth: {
+                    username: store.getters.username,
+                    password: oldPassword
+                }
+            }
+        );
+    },
+    getPurchases() {
+        return axios
+            .get("http://" + this.adresIPPort + "/myapp/Zakupy",
+                {
+                    params: null,
+                    withCredentials: true,
+                    auth: {
+                        username: store.getters.username,
+                        password: store.getters.password
+                    }
+                }
+            ).then(response => {
+                return response.data;
+            })
+            .catch(() => {
+                return null;
+            });
+    },
+    getStatuses() {
+        return axios
+            .get("http://" + this.adresIPPort + "/myapp/StatusyTransakcji",
+            ).then(response => {
+                return response.data;
+            })
+            .catch(() => {
+                return null;
+            });
+    },
+    updatePurchase(purchase) {
+        return axios.put(
+            "http://" + this.adresIPPort + "/myapp/Zakupy",
+            purchase, {
+                params: null,
+                withCredentials: true,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
 }
 export default DataAccess
 //opisanie api serwera

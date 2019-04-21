@@ -14,6 +14,7 @@ import Logout from "./Logout.vue";
 import UserIsLogin from "./UserIsLogin.vue";
 import UserIsLogout from "./UserIsLogout.vue";
 import EditDataOfEmployee from "./EditDataOfEmployee.vue";
+import PurchasesByEmployee from "./PurchasesByEmployee.vue";
 import { store } from "./store.js"
 
 Vue.use(VueRouter);
@@ -113,6 +114,15 @@ const routes = [
     path: "/edytujDane", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return EditDataOfEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/listaZakupow", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return PurchasesByEmployee;
       } else {
         return NotAccess;
       }

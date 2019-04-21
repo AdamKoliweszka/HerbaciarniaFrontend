@@ -6,6 +6,8 @@
       <router-link class="itemMenu" to="/gatunki">Edytowanie gatunków</router-link>
       <router-link class="itemMenu" to="/kraje">Edytowanie krajów</router-link>
       <router-link class="itemMenu" to="/dostawcy">Lista dostawców</router-link>
+      <router-link class="itemMenu" to="/listaDostaw">Lista dostaw</router-link>
+      <router-link class="itemMenu" to="/listaZakupow">Lista zakupów</router-link>
       <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
       <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
     </div>
