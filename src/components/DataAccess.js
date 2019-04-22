@@ -341,6 +341,37 @@ var DataAccess = {
             }
         );
     },
+    updateDelivery(delivery) {
+        return axios.put(
+            "http://" + this.adresIPPort + "/myapp/Dostawy",
+            delivery, {
+                params: null,
+                withCredentials: true,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
+    getDeliveries() {
+        return axios
+            .get("http://" + this.adresIPPort + "/myapp/Dostawy",
+                {
+                    params: null,
+                    withCredentials: true,
+                    auth: {
+                        username: store.getters.username,
+                        password: store.getters.password
+                    }
+                }
+            ).then(response => {
+                return response.data;
+            })
+            .catch(() => {
+                return null;
+            });
+    }
 }
 export default DataAccess
 //opisanie api serwera

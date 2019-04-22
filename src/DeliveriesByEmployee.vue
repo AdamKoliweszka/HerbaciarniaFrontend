@@ -1,22 +1,19 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div v-for="Purchase in purchases" v-bind:key="'Purchase' + Purchase.id_purchase">
-      <div>Numer zamówienia: {{Purchase.id_purchase}}</div>
+    <div v-for="Delivery in deliveries" v-bind:key="'Delivery' + Delivery.id_delivery">
+      <div>Numer dostawy: {{Delivery.id_delivery}}</div>
       <div>
-        Kupujący:
-        {{Purchase.customer.user.username}}
+        Dostawca:
+        {{Delivery.provider.name}} {{Delivery.provider.surname}}
         <br>
-        Dane Osobowe:
-        {{Purchase.customer.name}} {{Purchase.customer.surname}}
-        <br>
-        Adres: {{Purchase.customer.street}} {{Purchase.customer.city}}
+        Numer konta: {{Delivery.provider.account_number}}
       </div>
       <div>
-        <select v-model="Purchase.status">
+        <select v-model="Delivery.status">
           <option v-for="Status in statuses" v-bind:key="'Status' + Status.id_status" :value="Status">{{Status.name}}</option>
         </select>
-        <input type="button" value="Zaaktualizuj status" @click="updateStatus(Purchase)"/>
+        <input type="button" value="Zaaktualizuj status" @click="updateStatus(Delivery)"/>
       </div>
       <div></div>
     </div>
@@ -27,26 +24,25 @@
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
-  name: "PurchasesByEmployee",
+  name: "DeliveriesByEmployee",
   components: {
     MenuForEmployee
   },
   methods: {
-    updateStatus(Purchase)
+    updateStatus(Delivery)
     {
-      DataAccess.updatePurchase(Purchase);
+      DataAccess.updateDelivery(Delivery);
     }
   },
   data: function() {
     return {
-      purchases: [],
+      deliveries: [],
       statuses: []
     };
   },
   mounted() {
-    DataAccess.getPurchases().then(data => {
-      this.purchases = data;
-      
+    DataAccess.getDeliveries().then(data => {
+      this.deliveries = data;
     });
     DataAccess.getStatuses().then(data => {
       this.statuses = data;

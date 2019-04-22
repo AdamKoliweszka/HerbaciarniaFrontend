@@ -15,6 +15,7 @@ import UserIsLogin from "./UserIsLogin.vue";
 import UserIsLogout from "./UserIsLogout.vue";
 import EditDataOfEmployee from "./EditDataOfEmployee.vue";
 import PurchasesByEmployee from "./PurchasesByEmployee.vue";
+import DeliveriesByEmployee from "./DeliveriesByEmployee.vue";
 import { store } from "./store.js"
 
 Vue.use(VueRouter);
@@ -123,6 +124,15 @@ const routes = [
     path: "/listaZakupow", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return PurchasesByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/listaDostaw", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return DeliveriesByEmployee;
       } else {
         return NotAccess;
       }
