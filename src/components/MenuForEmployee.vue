@@ -16,6 +16,7 @@
     </div>
     <div v-if="roleOfUser === 'NIEZALOGOWANY'" id="menuForEmployee" class="Menu">
       <router-link class="itemMenu" to="/herbaty">Przeglądaj herbaty</router-link>
+      <router-link class="itemMenu" to="/rejestracja">Rejestracja</router-link>
       <router-link class="itemMenu" to="/login">Zaloguj</router-link>
     </div>
     <div class="GapBar"></div>

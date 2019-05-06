@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div v-if="!isAdded">
-      <div>
+     <div>
         Nazwa:
         <input type="text" v-model="tea.name">
       </div>
@@ -41,10 +40,10 @@
       <div>
         <input type="button" @click="addTea" value="Dodawanie">
       </div>
-    </div>
-    <div v-if="isAdded">
-      <p>Herbata została dodana!</p>
-    </div>
+    
+    <p v-for="(Comunicat,index) in comunicats" v-bind:key="'AddTeaByEmployee'+ index + Comunicat">
+        {{Comunicat}}
+      </p>
   </div>
 </template>
 
@@ -78,14 +77,34 @@ export default {
       },
       species: null,
       countries: null,
-      isAdded: false
+      comunicats: []
     };
   },
   methods: {
     addTea() {
-      DataAccess.addTea(this.tea).then(() => {
-        this.isAdded = true;
-      });
+      DataAccess.addTea(this.tea).then(response => {
+        this.comunicats = [];
+        this.comunicats.push(response.data);
+        this.clear();
+      })
+      .catch(error => {
+          this.comunicats = [];
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
+        });
+    },
+    clear() {
+        this.tea = {
+        id_tea: 0,
+        name: "",
+        description: "",
+        price_of_selling: 1,
+        price_of_delivery: 0,
+        available_quantity: 0,
+        tea_species: null,
+        country_of_origin: null
+      }
     }
   }
 };

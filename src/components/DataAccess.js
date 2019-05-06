@@ -8,7 +8,6 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Login",
             {
                 params: null,
-                withCredentials: true,
                 auth: {
                     username: user.username,
                     password: user.password
@@ -22,7 +21,6 @@ var DataAccess = {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie", {
                 params: null,
-                withCredentials: true,
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -40,7 +38,7 @@ var DataAccess = {
         return axios
             .get(link, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -57,7 +55,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Herbaty",
             tea, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -70,7 +68,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Herbaty",
             tea, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -84,7 +82,7 @@ var DataAccess = {
                 "http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie",
                 argument, {
                     params: null,
-                    withCredentials: true,
+                    
                     auth: {
                         username: store.getters.username,
                         password: store.getters.password
@@ -99,7 +97,7 @@ var DataAccess = {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Herbaty/Dostepne", {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -135,7 +133,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/GatunkiHerbaty", newSpecies,
             {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -148,7 +146,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/GatunkiHerbaty",
             species, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -161,7 +159,7 @@ var DataAccess = {
         link += id;
         return axios.delete(link, {
             params: null,
-            withCredentials: true,
+            
             auth: {
                 username: store.getters.username,
                 password: store.getters.password
@@ -183,7 +181,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/KrajePochodzenia", newCountry,
             {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -196,7 +194,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/KrajePochodzenia",
             country, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -209,7 +207,7 @@ var DataAccess = {
         link += id;
         return axios.delete(link, {
             params: null,
-            withCredentials: true,
+            
             auth: {
                 username: store.getters.username,
                 password: store.getters.password
@@ -243,7 +241,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Dostawcy",
             provider, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -257,7 +255,7 @@ var DataAccess = {
             .get("http://" + this.adresIPPort + "/myapp/DanePracownika",
                 {
                     params: null,
-                    withCredentials: true,
+                    
                     auth: {
                         username: store.getters.username,
                         password: store.getters.password
@@ -265,9 +263,6 @@ var DataAccess = {
                 }
             ).then(response => {
                 return response.data;
-            })
-            .catch(() => {
-                return null;
             });
     },
     updateEmployee(employee) {
@@ -275,7 +270,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Pracownicy",
             employee, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -292,7 +287,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Uzytkownicy",
             user, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: oldPassword
@@ -305,7 +300,7 @@ var DataAccess = {
             .get("http://" + this.adresIPPort + "/myapp/Zakupy",
                 {
                     params: null,
-                    withCredentials: true,
+                    
                     auth: {
                         username: store.getters.username,
                         password: store.getters.password
@@ -333,7 +328,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Zakupy",
             purchase, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -346,7 +341,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Dostawy",
             delivery, {
                 params: null,
-                withCredentials: true,
+                
                 auth: {
                     username: store.getters.username,
                     password: store.getters.password
@@ -359,7 +354,7 @@ var DataAccess = {
             .get("http://" + this.adresIPPort + "/myapp/Dostawy",
                 {
                     params: null,
-                    withCredentials: true,
+                    
                     auth: {
                         username: store.getters.username,
                         password: store.getters.password
@@ -371,7 +366,14 @@ var DataAccess = {
             .catch(() => {
                 return null;
             });
-    }
+    },
+    addCustomer(customer) {
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Klienci", customer
+        ).then(response => {
+            return response;
+        });
+    },
 }
 export default DataAccess
 //opisanie api serwera

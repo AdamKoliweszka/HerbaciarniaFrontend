@@ -35,7 +35,7 @@ export default {
     };
   },
   mounted() {
-    DataAccess.getProviders().then(data => {this.providers = data});
+    DataAccess.getProviders().then(data => {this.providers = data;  });
   },
 };
 </script>

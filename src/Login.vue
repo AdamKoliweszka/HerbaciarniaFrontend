@@ -20,6 +20,7 @@
 
 <script>
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
+import { error } from 'util';
 export default {
   name: "Logowanie",
   components: {
@@ -37,6 +38,8 @@ export default {
       login(){
         this.$store.dispatch('login',this.user).then( () => {
             this.$router.go();
+        }).catch(error => {
+
         });
       }
   }

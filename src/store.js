@@ -59,6 +59,10 @@ export const store = new Vuex.Store({
                     return data;
                 }
             });
+        },
+        changePassword(context, newPassword) {
+            context.commit("changePassword", newPassword);
+              
         }
     }
 })

@@ -46,6 +46,7 @@ export default {
   mounted() {
     DataAccess.getPurchases().then(data => {
       this.purchases = data;
+      console.log(this.purchases)
       
     });
     DataAccess.getStatuses().then(data => {

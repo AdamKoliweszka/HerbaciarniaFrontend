@@ -42,19 +42,9 @@
         <input type="button" @click="edit" value="Edytuj">
       </div>
     </div>
-
-    <div v-if="species == null || countries == null">
-      <p>Brak połączenia z serwerem!</p>
-    </div>
-
-    <div v-if="isEdited">
-      <p>Herbata została poprawnie edytowana!</p>
-    </div>
-
-    <div v-if="isError">
-      <p>Operacja się nie powiodła!</p>
-    </div>
-
+        <p v-for="(Comunicat,index) in comunicats" v-bind:key="'EditTeaByEmployee'+ index + Comunicat">
+        {{Comunicat}}
+      </p>
   </div>
 </template>
 
@@ -64,18 +54,16 @@ import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "EditTeaByEmployee",
   mounted() {
-    
     DataAccess.getAllTeaById(this.$route.params.id).then(data => {
       this.tea = data;
     });
-    
+
     DataAccess.getSpecies().then(data => {
       this.species = data;
     });
     DataAccess.getCountries().then(data => {
       this.countries = data;
     });
-    
   },
   components: {
     MenuForEmployee
@@ -95,23 +83,25 @@ export default {
       species: null,
       countries: null,
       isEdited: false,
-      isError: false
+      isError: false,
+      comunicats: []
     };
   },
   methods: {
     edit() {
       if (!this.isEdited) {
-        DataAccess.updateTea(this.tea).then(() => {
-          this.isEdited = true;
-          this.isError = false;
-          this.clear();
-        }).catch(() => {
-            this.isError = true;
-        });
+        DataAccess.updateTea(this.tea)
+          .then(response => {
+            this.comunicats = [];
+            this.comunicats.push(response.data);
+          })
+          .catch(error => {
+            this.comunicats = [];
+            for (var propName in error.response.data) {
+              this.comunicats.push(error.response.data[propName]);
+            }
+          });
       }
-    },
-    clear() {
-      this.tea.id_tea = 0;
     }
   }
 };

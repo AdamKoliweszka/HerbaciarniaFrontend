@@ -29,7 +29,12 @@
       <div>
         <input type="button" value="Edytuj hasło" @click="changePassword">
       </div>
+      
     </div>
+    <p
+        v-for="(Comunicat,index) in comunicats"
+        v-bind:key="'EditDataByEmployee'+ index + Comunicat"
+      >{{Comunicat}}</p>
   </div>
 </template>
 
@@ -56,19 +61,38 @@ export default {
         date_of_dismis: ""
       },
       oldPassword: "",
-      newPassword: ""
+      newPassword: "",
+      comunicats: []
     };
   },
   methods: {
     changeData() {
-      DataAccess.updateEmployee(this.employee).then(() => {
-        console.log("Udalo sie!");
-      });
+      DataAccess.updateEmployee(this.employee)
+        .then(response => {
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+        })
+        .catch(error => {
+          this.comunicats = [];
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
+        });
     },
     changePassword() {
-      DataAccess.updatePassword(this.oldPassword,this.newPassword).then(() => {
-        console.log("Udalo sie!");
-      });
+      DataAccess.updatePassword(this.oldPassword, this.newPassword)
+        .then(response => {
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+          this.$store.dispatch('changePassword',this.newPassword);
+        })
+        .catch(error => {
+          this.comunicats = [];
+          this.comunicats.push("Nieprawidłowe hasło!");
+          //for (var propName in error.response.data) {
+            //this.comunicats.push(error.response.data[propName]);
+          //}
+        });
     }
   }
 };
