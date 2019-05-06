@@ -30,27 +30,12 @@
         <input type="text" v-model="nameOfNewCountry">
         <input type="button" class="button" value="Dodaj" @click="addCountry">
       </div>
-      <div
-        v-if="komunikatEdycjaKraju == 'komunikatKrajNiezdefiniowany'"
-        class="komunikatBledu"
-      >Kraj "Niezdefiniowany" niemoże ulec zmianie!</div>
-      <div
-        v-if="komunikatEdycjaKraju == 'komunikatKrajPusty'"
-        class="komunikatBledu"
-      >Nie został wybrany Kraj!</div>
-      <div
-        v-if="komunikatEdycjaKraju == 'komunikatKrajDodany'"
-        class="komunikatPowodzenia"
-      >Kraj poprawnie dodany!</div>
-      <div
-        v-if="komunikatEdycjaKraju == 'komunikatKrajUsuniety'"
-        class="komunikatPowodzenia"
-      >Kraj poprawnie usunięty!</div>
-      <div
-        v-if="komunikatEdycjaKraju == 'komunikatKrajZmieniony'"
-        class="komunikatPowodzenia"
-      >Nazwa Kraju została zmieniona!</div>
+      
     </div>
+    <p
+      v-for="(Comunicat,index) in comunicats"
+      v-bind:key="'CountriesByEmployee'+ index + Comunicat"
+    >{{Comunicat}}</p>
   </div>
 </template>
 
@@ -77,57 +62,67 @@ export default {
       newCountry: {
         id_country: 0,
         name: ""
-      }
+      },
+      comunicats: []
     };
   },
   methods: {
     updateNameOfCountry() {
       this.newNameOfCountry = this.selectedCountry.name;
-      this.komunikatEdycjaKraju = "komunikatBleduNiewidoczny";
     },
     deleteCountry() {
-      if (this.selectedCountry == null) {
-        this.komunikatEdycjaKraju = "komunikatKrajPusty";
-      } else if (this.selectedCountry.id_country > 1) {
-        DataAccess.deleteCountry(this.selectedCountry.id_country).then(() => {
+      if (this.selectedCountry != null) {
+        DataAccess.deleteCountry(this.selectedCountry.id_country).then(response => {
           DataAccess.getCountries().then(data => {
             this.countries = data;
           });
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+          this.newNameOfCountry = "";
+        }).catch(error => {
+          this.comunicats = [];
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
         });
-
-        this.newNameOfCountry = "";
-        this.komunikatEdycjaKraju = "komunikatKrajUsuniety";
-      } else {
-        this.komunikatEdycjaKraju = "komunikatKrajNiezdefiniowany";
-      }
+        
+      } 
     },
     updateCountry() {
-      if (this.selectedCountry == null) {
-        this.komunikatEdycjaKraju = "komunikatKrajPusty";
-      } else if (this.selectedCountry.id_country > 1) {
+      if (this.selectedCountry != null) {
         this.selectedCountry.name = this.newNameOfCountry;
-        DataAccess.updateCountry(this.selectedCountry).then(() => {
+        DataAccess.updateCountry(this.selectedCountry).then(response => {
           DataAccess.getCountries().then(data => {
             this.countries = data;
           });
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+        }).catch(error => {
+          this.comunicats = [];
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
         });
-
-        this.newNameOfCountry = "";
-        this.komunikatEdycjaKraju = "komunikatKrajZmieniony";
-      } else {
-        this.komunikatEdycjaKraju = "komunikatKrajNiezdefiniowany";
-      }
+        
+      } 
     },
     addCountry() {
       this.newCountry.name = this.nameOfNewCountry;
-      DataAccess.addCountry(this.newCountry).then(() => {
+      DataAccess.addCountry(this.newCountry).then(response => {
         DataAccess.getCountries().then(data => {
           this.countries = data;
         });
-      });
+        this.nameOfNewCountry = "";
+        this.comunicats = [];
+        this.comunicats.push(response.data);
+      }).catch(error => {
+          this.comunicats = [];
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
+        });
 
-      this.nameOfNewCountry = "";
-      this.komunikatEdycjaKraju = "komunikatKrajDodany";
+      
     }
   }
 };

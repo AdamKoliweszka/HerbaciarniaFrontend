@@ -4,11 +4,7 @@
     <div class="Container">
       <div class="ContainerItem">
         <p>Edytowanie gatunku:</p>
-        <select
-          v-model="selectedSpecies"
-          @change="updateNameOfSpecies()"
-          class="comboBox"
-        >
+        <select v-model="selectedSpecies" @change="updateNameOfSpecies()" class="comboBox">
           <option
             v-for="TeaSpecies in species"
             :value="TeaSpecies"
@@ -18,44 +14,18 @@
         <input type="button" class="button_EdytowanieGatunkow" value="Usuń" @click="deleteSpecies">
         <br>Nazwa gatunku:
         <input type="text" v-model="newNameOfSpecies">
-        <input
-          type="button"
-          class="button"
-          value="Zmień nazwe"
-          @click="updateSpecies"
-        >
+        <input type="button" class="button" value="Zmień nazwe" @click="updateSpecies">
       </div>
       <div class="ContainerItem">
         <p>Dodawanie gatunku:</p>Nazwa gatunku:
         <input type="text" v-model="nameOfNewSpecies">
-        <input
-          type="button"
-          class="button"
-          value="Dodaj"
-          @click="addSpecies"
-        >
+        <input type="button" class="button" value="Dodaj" @click="addSpecies">
       </div>
-      <div
-        v-if="komunikatEdycjaGatunku == 'komunikatGatunekNiezdefiniowany'"
-        class="komunikatBledu"
-      >Gatunek "Niezdefiniowany" niemoże ulec zmianie!</div>
-      <div
-        v-if="komunikatEdycjaGatunku == 'komunikatGatunekPusty'"
-        class="komunikatBledu"
-      >Nie został wybrany gatunek!</div>
-      <div
-        v-if="komunikatEdycjaGatunku == 'komunikatGatunekDodany'"
-        class="komunikatPowodzenia"
-      >Gatunek poprawnie dodany!</div>
-      <div
-        v-if="komunikatEdycjaGatunku == 'komunikatGatunekUsuniety'"
-        class="komunikatPowodzenia"
-      >Gatunek poprawnie usunięty!</div>
-      <div
-        v-if="komunikatEdycjaGatunku == 'komunikatGatunekZmieniony'"
-        class="komunikatPowodzenia"
-      >Nazwa gatunku została zmieniona!</div>
     </div>
+    <p
+      v-for="(Comunicat,index) in comunicats"
+      v-bind:key="'TeaSpeciesByEmployee'+ index + Comunicat"
+    >{{Comunicat}}</p>
   </div>
 </template>
 
@@ -67,7 +37,7 @@ export default {
   components: {
     MenuForEmployee
   },
-  mounted(){
+  mounted() {
     DataAccess.getSpecies().then(data => {
       this.species = data;
     });
@@ -78,59 +48,73 @@ export default {
       selectedSpecies: null,
       newNameOfSpecies: "",
       nameOfNewSpecies: "",
-      komunikatEdycjaGatunku: "",
       newSpecies: {
         id_species: 0,
         name: ""
       },
-      adresIPPort: "10.211.55.5:8086"
+      comunicats: []
     };
   },
   methods: {
     updateNameOfSpecies() {
       this.newNameOfSpecies = this.selectedSpecies.name;
-      this.komunikatEdycjaGatunku = "komunikatBleduNiewidoczny";
     },
     deleteSpecies() {
-      if (this.selectedSpecies == null) {
-        this.komunikatEdycjaGatunku = "komunikatGatunekPusty";
-      } else if (this.selectedSpecies.id_species > 1) {
-        DataAccess.deleteSpecies(this.selectedSpecies.id_species).then(() => {
+      if (this.selectedSpecies != null) {
+        DataAccess.deleteSpecies(this.selectedSpecies.id_species).then(response => {
           DataAccess.getSpecies().then(data => {
             this.species = data;
           });
+          this.newNameOfSpecies = "";
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+        }).catch(error => {
+          this.comunicats = [];
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
         });
-        this.newNameOfSpecies = "";
-        this.komunikatEdycjaGatunku = "komunikatGatunekUsuniety";
-      } else {
-        this.komunikatEdycjaGatunku = "komunikatGatunekNiezdefiniowany";
+        
       }
     },
     updateSpecies() {
-      if (this.selectedSpecies == null) {
-        this.komunikatEdycjaGatunku = "komunikatGatunekPusty";
-      } else if (this.selectedSpecies.id_species > 1) {
+      if (this.selectedSpecies != null) {
         this.selectedSpecies.name = this.newNameOfSpecies;
-        DataAccess.updateSpecies(this.selectedSpecies).then(() => {
+        DataAccess.updateSpecies(this.selectedSpecies).then(response => {
+          DataAccess.getSpecies().then(data => {
+            this.species = data;
+          });
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+        }).catch(error => {
+          this.comunicats = [];
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
           DataAccess.getSpecies().then(data => {
             this.species = data;
           });
         });
-        this.newNameOfSpecies = "";
-        this.komunikatEdycjaGatunku = "komunikatGatunekZmieniony";
-      } else {
-        this.komunikatEdycjaGatunku = "komunikatGatunekNiezdefiniowany";
+        
       }
     },
     addSpecies() {
       this.newSpecies.name = this.nameOfNewSpecies;
-      DataAccess.addSpecies(this.newSpecies).then(() => {
-        DataAccess.getSpecies().then(data => {
-          this.species = data;
+      DataAccess.addSpecies(this.newSpecies)
+        .then(response => {
+          DataAccess.getSpecies().then(data => {
+            this.species = data;
+          });
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+          this.nameOfNewSpecies = "";
+        })
+        .catch(error => {
+          this.comunicats = [];
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
         });
-      });
-      this.nameOfNewSpecies = "";
-      this.komunikatEdycjaGatunku = "komunikatGatunekDodany";
     }
   }
 };
