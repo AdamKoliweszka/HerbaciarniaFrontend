@@ -13,10 +13,10 @@ export const store = new Vuex.Store({
     state: {
         count: 10,
         user: {
-            username: "Mateusz",
-            password: "Krol"
+            username: " ",
+            password: " "
         },
-        roleOfUser: "PRACOWNIK"
+        roleOfUser: "NIEZALOGOWANY"
     },
     getters: {
         username(state) {

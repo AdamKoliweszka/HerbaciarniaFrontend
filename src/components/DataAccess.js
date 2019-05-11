@@ -33,6 +33,16 @@ var DataAccess = {
                 return null;
             });
     },
+    getTea() {
+        return axios
+            .get("http://" + this.adresIPPort + "/myapp/Herbaty/Dostepne")
+            .then(response => {
+                return response.data;
+            })
+            .catch(() => {
+                return null;
+            });
+    },
     getAllTeaById(id) {
         var link = "http://" + this.adresIPPort + "/myapp/Herbaty/" + id;
         return axios
@@ -88,6 +98,16 @@ var DataAccess = {
                         password: store.getters.password
                     }
                 }
+            )
+            .then(response => {
+                return response.data;
+            });
+    },
+    getTeaFiltred(argument) {
+        return axios
+            .post(
+                "http://" + this.adresIPPort + "/myapp/Herbaty/Dostepne",
+                argument
             )
             .then(response => {
                 return response.data;
@@ -249,7 +269,18 @@ var DataAccess = {
             }
         );
     },
-
+    addProvider(provider) {
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Dostawcy",
+            provider, {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
     getDataOfEmployee() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/DanePracownika",

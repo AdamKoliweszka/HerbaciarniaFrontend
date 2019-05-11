@@ -2,11 +2,13 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
 import TeaByEmployee from "./TeaByEmployee.vue";
+import TeaByUnregister from "./TeaByUnregister.vue";
 import CountriesByEmployee from "./CountriesByEmployee.vue";
 import TeaSpeciesByEmployee from "./TeaSpeciesByEmployee.vue";
 import EditTeaByEmployee from "./EditTeaByEmployee.vue";
 import EditProviderByEmployee from "./EditProviderByEmployee.vue";
 import AddTeaByEmployee from "./AddTeaByEmployee.vue";
+import AddProviderByEmployee from "./AddProviderByEmployee.vue";
 import ProvidersByEmployee from "./ProvidersByEmployee.vue";
 import Login from "./Login.vue";
 import NotAccess from "./NotAccess.vue";
@@ -53,7 +55,9 @@ const routes = [
     path: "/herbaty", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return TeaByEmployee;
-      } else {
+      } else if(store.getters.roleOfUser === "NIEZALOGOWANY"){
+        return TeaByUnregister; 
+      }else {
         return NotAccess;
       }
     }
@@ -98,7 +102,7 @@ const routes = [
     path: "/herbaty/:id", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return EditTeaByEmployee;
-      } else {
+      }else{
         return NotAccess;
       }
     }
@@ -107,6 +111,15 @@ const routes = [
     path: "/dodawanieHerbaty", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return AddTeaByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/dodawanieDostawcy", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return AddProviderByEmployee;
       } else {
         return NotAccess;
       }

@@ -3,6 +3,7 @@
     <div v-if="roleOfUser === 'PRACOWNIK'" id="menuForEmployee" class="Menu">
       <router-link class="itemMenu" to="/herbaty">Edytowanie herbat</router-link>
       <router-link class="itemMenu" to="/dodawanieHerbaty">Dodawanie herbaty</router-link>
+      <router-link class="itemMenu" to="/dodawanieDostawcy">Dodawanie dostawcy</router-link>
       <router-link class="itemMenu" to="/gatunki">Edytowanie gatunków</router-link>
       <router-link class="itemMenu" to="/kraje">Edytowanie krajów</router-link>
       <router-link class="itemMenu" to="/dostawcy">Lista dostawców</router-link>

@@ -12,7 +12,6 @@
           <br>
           Cena: {{Tea.price_of_selling}}
           Ilosc: {{Tea.available_quantity}}
-          <router-link class="itemMenu" :to="{ path:'/herbaty/'+Tea.id_tea }">Edytuj</router-link>
         </div>
       </div>
     </div>
@@ -21,7 +20,7 @@
 
 <script>
 export default {
-  name: 'ListaHerbatKlient',
+  name: 'ListTeaByUnregister',
   props: {
     tea: null
   },

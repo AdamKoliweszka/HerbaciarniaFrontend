@@ -7,7 +7,8 @@
         </div>
         <div>
           Adres:<br>
-          {{Provider.street}} {{Provider.city}}
+          {{Provider.street}} 
+          {{Provider.city}}
         </div>
         <div>
           Konto bankowe: {{Provider.account_number}}
@@ -35,7 +36,7 @@ export default {
     };
   },
   mounted() {
-    DataAccess.getProviders().then(data => {this.providers = data;  });
+    DataAccess.getProviders().then(data => {this.providers = data; });
   },
 };
 </script>

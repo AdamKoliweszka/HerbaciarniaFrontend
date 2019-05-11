@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div v-if="provider.id_provider > 0">
+    <div>
       <div>
         Imie:
         <input type="text" v-model="provider.name">
@@ -23,7 +23,7 @@
         <input type="number" v-model="provider.account_number">
       </div>
       <div>
-        <input type="button" @click="edit" value="Edytuj">
+        <input type="button" @click="add" value="Dodaj">
       </div>
     </div>
     <p
@@ -38,11 +38,6 @@ import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
   name: "EditTeaByEmployee",
-  mounted() {
-    DataAccess.getProviderById(this.$route.params.id).then(data => {
-      this.provider = data;
-    });
-  },
   components: {
     MenuForEmployee
   },
@@ -60,8 +55,8 @@ export default {
     };
   },
   methods: {
-    edit() {
-      DataAccess.updateProvider(this.provider)
+    add() {
+      DataAccess.addProvider(this.provider)
         .then(response => {
           this.comunicats = [];
           this.comunicats.push(response.data);

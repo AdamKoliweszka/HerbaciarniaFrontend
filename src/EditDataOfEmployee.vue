@@ -88,10 +88,9 @@ export default {
         })
         .catch(error => {
           this.comunicats = [];
-          this.comunicats.push("Nieprawidłowe hasło!");
-          //for (var propName in error.response.data) {
-            //this.comunicats.push(error.response.data[propName]);
-          //}
+          for (var propName in error.response.data) {
+            this.comunicats.push(error.response.data[propName]);
+          }
         });
     }
   }

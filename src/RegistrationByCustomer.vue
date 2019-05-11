@@ -2,44 +2,27 @@
   <div>
     <MenuForEmployee/>
     <div class="Content">
-      <div>
-        Login:
-        <input type:text v-model="customer.user.username">
-      </div>
-
-      <div>
-        Hasło:
+    <form @submit="register">
+        <label for="login">Login:</label>
+        <input id="login" type="text" v-model="customer.user.username">
+        <label for="password">Hasło:</label>
         <input type="password" v-model="customer.user.password">
-      </div>
-
-      <div>
-        Imie:
-        <input type:text v-model="customer.name">
-      </div>
-
-      <div>
-        Nazwisko:
-        <input type:text v-model="customer.surname">
-      </div>
-
-      <div>
-        Ulica:
-        <input type:text v-model="customer.street">
-      </div>
-
-      <div>
-        Miejscowość:
-        <input type:text v-model="customer.city">
-      </div>
-
-      <div>
-        <input type="button" @click="register" value="Rejestruj">
-      </div>
+        <label for="name">Imie:</label>
+        <input id="name" type="text" v-model="customer.name">
+        <label for="surname">Nazwisko:</label>
+        <input id="surname" type="text" v-model="customer.surname">
+        <label for="street">Ulica:</label>
+        <input id="street" type="text" v-model="customer.street">
+        <label for="city">Miejscowość:</label>
+        <input id="city" type="text" v-model="customer.city">
+        <input type="submit" value="Rejestruj"/>
+      </form>
+    </div>
       <p v-for="(Comunicat,index) in comunicats" v-bind:key="'RegistrationByCustomer'+ index + Comunicat">
         {{Comunicat}}
       </p>
     </div>
-  </div>
+ 
 </template>
 
 <script>
@@ -101,7 +84,11 @@ export default {
 
 
 <style scoped>
+input{
+  width: 100%;
+}
 .Content {
+  width: 70%;
   padding: 5px;
 }
 </style>

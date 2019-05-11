@@ -2,19 +2,17 @@
   <div>
     <MenuForEmployee/>
     <div class="Content">
-      <div>
-        Login:
-        <input type:text v-model="user.username">
-      </div>
-
-      <div>
-        Hasło:
-        <input type="password" v-model="user.password">
-      </div>
-      <div>
-        <input type="button" @click="login" value="Zaloguj"/>
-      </div>
+      <form @submit="login">
+        <label for="login">Login:</label>
+        <input id="login" type="text" v-model="user.username">
+        <br>
+        <label for="login">Hasło:</label>
+        <input id="password" type="password" v-model="user.password">
+        <br>
+        <input type="submit" value="Zaloguj"/>
+      </form>
     </div>
+    {{comunicat}}
   </div>
 </template>
 
@@ -31,7 +29,8 @@ export default {
       user: {
         username: "",
         password: ""
-      }
+      },
+      comunicat: ""
     };
   },
   methods: {
@@ -39,7 +38,7 @@ export default {
         this.$store.dispatch('login',this.user).then( () => {
             this.$router.go();
         }).catch(error => {
-
+            this.comunicat = "Niepoprawne dane logowania!";
         });
       }
   }
