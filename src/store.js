@@ -16,7 +16,8 @@ export const store = new Vuex.Store({
             username: " ",
             password: " "
         },
-        roleOfUser: "NIEZALOGOWANY"
+        roleOfUser: "NIEZALOGOWANY",
+        purchases: []
     },
     getters: {
         username(state) {
@@ -30,6 +31,10 @@ export const store = new Vuex.Store({
         },
         roleOfUser(state) {
             return state.roleOfUser;
+        },
+        purchases(state)
+        {
+            return state.purchases;
         }
     },
     mutations: {
@@ -48,6 +53,14 @@ export const store = new Vuex.Store({
         },
         changePassword(state,password) {
             state.user.password = password;
+        },
+        addPurchase(state,purchase)
+        {
+            state.purchases.push(purchase);
+        },
+        deletePurchase(state,purchase)
+        {
+            state.purchases.pop(purchas);
         }
     },
     actions: {

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 import TeaByEmployee from "./TeaByEmployee.vue";
 import TeaByUnregister from "./TeaByUnregister.vue";
+import TeaByCustomer from "./TeaByCustomer.vue";
 import CountriesByEmployee from "./CountriesByEmployee.vue";
 import TeaSpeciesByEmployee from "./TeaSpeciesByEmployee.vue";
 import EditTeaByEmployee from "./EditTeaByEmployee.vue";
@@ -19,6 +20,7 @@ import EditDataOfEmployee from "./EditDataOfEmployee.vue";
 import PurchasesByEmployee from "./PurchasesByEmployee.vue";
 import DeliveriesByEmployee from "./DeliveriesByEmployee.vue";
 import RegistrationByCustomer from "./RegistrationByCustomer.vue";
+import ShoppingCartByCustomer from "./ShoppingCartByCustomer.vue";
 import { store } from "./store.js"
 
 Vue.use(VueRouter);
@@ -30,6 +32,15 @@ const routes = [
         return Login;
       } else {
         return UserIsLogin;
+      }
+    }
+  },
+  {
+    path: "/koszyk", get component() {
+      if (store.getters.roleOfUser === "KLIENT") {
+        return ShoppingCartByCustomer;
+      } else {
+        return NotAccess;
       }
     }
   },
@@ -57,6 +68,8 @@ const routes = [
         return TeaByEmployee;
       } else if(store.getters.roleOfUser === "NIEZALOGOWANY"){
         return TeaByUnregister; 
+      }else if(store.getters.roleOfUser === "KLIENT"){
+        return TeaByCustomer; 
       }else {
         return NotAccess;
       }
