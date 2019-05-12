@@ -405,6 +405,18 @@ var DataAccess = {
             return response;
         });
     },
+    addAllPurchases() {
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Zakupy",
+            store.getters.purchases, {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
 }
 export default DataAccess
 //opisanie api serwera

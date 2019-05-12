@@ -60,7 +60,11 @@ export const store = new Vuex.Store({
         },
         deletePurchase(state,purchase)
         {
-            state.purchases.pop(purchas);
+            state.purchases.pop(purchase);
+        },
+        clearPurchases(state)
+        {
+            state.purchases = [];
         }
     },
     actions: {
@@ -76,6 +80,10 @@ export const store = new Vuex.Store({
         changePassword(context, newPassword) {
             context.commit("changePassword", newPassword);
               
+        },
+        clearPurchases(context)
+        {
+            context.commit("clearPurchases");
         }
     }
 })
