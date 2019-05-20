@@ -36,7 +36,9 @@ export default {
   methods: {
       login(){
         this.$store.dispatch('login',this.user).then( () => {
-            this.$router.go();
+            console.log("jest");
+            //this.$router.go();
+            
         }).catch(error => {
             this.comunicat = "Niepoprawne dane logowania!";
         });

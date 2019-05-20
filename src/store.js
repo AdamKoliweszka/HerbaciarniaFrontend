@@ -56,11 +56,33 @@ export const store = new Vuex.Store({
         },
         addPurchase(state,purchase)
         {
-            state.purchases.push(purchase);
+            var index= -1;
+            for(let i =0 ;i<state.purchases.length;i++)
+            {
+                if( state.purchases[i].tea.name === purchase.tea.name)
+                {
+                    index = i;
+                }
+            }
+            if(index == -1)
+            {
+                state.purchases.push(purchase);
+            }else{
+                state.purchases[index].amount = parseInt(state.purchases[index].amount) + parseInt(purchase.amount); 
+            }
+            
         },
         deletePurchase(state,purchase)
         {
-            state.purchases.pop(purchase);
+            let purchases = [];
+            for(let i =0 ;i<state.purchases.length;i++)
+            {
+                if( state.purchases[i] !== purchase)
+                {
+                    purchases.push(state.purchases[i]);
+                }
+            }
+            state.purchases = purchases;
         },
         clearPurchases(state)
         {
@@ -84,6 +106,10 @@ export const store = new Vuex.Store({
         clearPurchases(context)
         {
             context.commit("clearPurchases");
+        },
+        deletePurchase(context,purchase)
+        {
+            context.commit("deletePurchase",purchase);
         }
     }
 })

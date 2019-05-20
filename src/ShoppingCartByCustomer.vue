@@ -19,8 +19,10 @@
           onkeydown="return false"
         >
         <input type="button" value="Kup" @click="buyOne(Purchase)">
+        <input type="button" value="Usuń" @click="deleteOne(Purchase)">
       </div>
       <input type="button" value="Kup wszystkie" @click="buyAll()">
+      <input type="button" value="Usuń wszystkie" @click="clearAll()">
     </div>
       <p
       v-for="(Comunicat,index) in comunicats"
@@ -49,16 +51,29 @@ export default {
   },
   methods: {
     buyOne(purchase) {
-      this.$store.commit("addPurchase", purchase);
+      DataAccess.addOnePurchase(purchase).then( () =>{
+        this.$store.dispatch("deletePurchase",purchase);
+        this.comunicats = [];
+        this.comunicats.push("Zakup powiódł się");
+      }).catch(error => {
+        this.comunicats = [];
+        this.comunicats.push("Zakup nie powiódł się");
+      });
+    },
+    deleteOne(purchase) {
+      this.$store.commit("deletePurchase", purchase);
+    },
+    clearAll() {
+      this.$store.commit("clearPurchases");
     },
     buyAll() {
       DataAccess.addAllPurchases().then( () =>{
         this.$store.dispatch("clearPurchases");
-        comunicats = [];
-        comunicats.push("Zakup powiódł się");
+        this.comunicats = [];
+        this.comunicats.push("Zakup powiódł się");
       }).catch(error => {
-        comunicats = [];
-        comunicats.push("Zakup nie powiódł się");
+        this.comunicats = [];
+        this.comunicats.push("Zakup nie powiódł się");
       });
     }
   }

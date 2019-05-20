@@ -17,7 +17,9 @@ import Logout from "./Logout.vue";
 import UserIsLogin from "./UserIsLogin.vue";
 import UserIsLogout from "./UserIsLogout.vue";
 import EditDataOfEmployee from "./EditDataOfEmployee.vue";
+import EditDataOfCustomer from "./EditDataOfCustomer.vue";
 import PurchasesByEmployee from "./PurchasesByEmployee.vue";
+import PurchasesByCustomer from "./PurchasesByCustomer.vue";
 import DeliveriesByEmployee from "./DeliveriesByEmployee.vue";
 import RegistrationByCustomer from "./RegistrationByCustomer.vue";
 import ShoppingCartByCustomer from "./ShoppingCartByCustomer.vue";
@@ -66,11 +68,11 @@ const routes = [
     path: "/herbaty", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return TeaByEmployee;
-      } else if(store.getters.roleOfUser === "NIEZALOGOWANY"){
-        return TeaByUnregister; 
-      }else if(store.getters.roleOfUser === "KLIENT"){
-        return TeaByCustomer; 
-      }else {
+      } else if (store.getters.roleOfUser === "NIEZALOGOWANY") {
+        return TeaByUnregister;
+      } else if (store.getters.roleOfUser === "KLIENT") {
+        return TeaByCustomer;
+      } else {
         return NotAccess;
       }
     }
@@ -115,7 +117,7 @@ const routes = [
     path: "/herbaty/:id", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return EditTeaByEmployee;
-      }else{
+      } else {
         return NotAccess;
       }
     }
@@ -142,6 +144,8 @@ const routes = [
     path: "/edytujDane", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return EditDataOfEmployee;
+      } else if (store.getters.roleOfUser === "KLIENT") {
+        return EditDataOfCustomer;
       } else {
         return NotAccess;
       }
@@ -151,7 +155,10 @@ const routes = [
     path: "/listaZakupow", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return PurchasesByEmployee;
-      } else {
+      }else if(store.getters.roleOfUser === "KLIENT")
+      {
+        return PurchasesByCustomer;
+      }else {
         return NotAccess;
       }
     }

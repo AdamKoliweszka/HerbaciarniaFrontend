@@ -8,6 +8,12 @@
         {{Delivery.provider.name}} {{Delivery.provider.surname}}
         <br>
         Numer konta: {{Delivery.provider.account_number}}
+        <br>
+        Herbata: {{Delivery.tea.name}}
+        <br>
+        Ilość zamówionej herbaty: {{Delivery.amount}}
+        <br>
+        Data zamówienia dostawy: {{Delivery.date_of_delivery}}
       </div>
       <div>
         <select v-model="Delivery.status">

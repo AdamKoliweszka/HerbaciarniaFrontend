@@ -4,21 +4,22 @@
     <div v-for="Purchase in purchases" v-bind:key="'Purchase' + Purchase.id_purchase">
       <div>Numer zamówienia: {{Purchase.id_purchase}}</div>
       <div>
-        Kupujący:
-        {{Purchase.customer.user.username}}
+        Herbata:
+        {{Purchase.tea.name}}
         <br>
-        Dane Osobowe:
-        {{Purchase.customer.name}} {{Purchase.customer.surname}}
+        Ilość:
+        {{Purchase.amount}}
         <br>
-        Adres: {{Purchase.customer.street}} {{Purchase.customer.city}}
+        Adres zamówienia: {{Purchase.customer.street}} {{Purchase.customer.city}}
+         <br>
+        Opiekun zamówienia: {{Purchase.employee.name}} {{Purchase.employee.surname}}
+        <br>
+        Status: {{Purchase.status.name}}
         <br>
         Data zamówienia: {{Purchase.date_of_purchases}}
       </div>
       <div>
-        <select v-model="Purchase.status">
-          <option v-for="Status in statuses" v-bind:key="'Status' + Status.id_status" :value="Status">{{Status.name}}</option>
-        </select>
-        <input type="button" value="Zaaktualizuj status" @click="updateStatus(Purchase)"/>
+        
       </div>
       <div></div>
     </div>

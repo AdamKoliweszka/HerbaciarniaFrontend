@@ -296,10 +296,37 @@ var DataAccess = {
                 return response.data;
             });
     },
-    updateEmployee(employee) {
+    getDataOfCustomer() {
+        return axios
+            .get("http://" + this.adresIPPort + "/myapp/DaneKlienta",
+                {
+                    params: null,
+                    auth: {
+                        username: store.getters.username,
+                        password: store.getters.password
+                    }
+                }
+            ).then(response => {
+                return response.data;
+            });
+    },
+    updateEmployee(customer) {
         return axios.put(
             "http://" + this.adresIPPort + "/myapp/Pracownicy",
-            employee, {
+            customer, {
+                params: null,
+                
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
+    updateCustomer(customer) {
+        return axios.put(
+            "http://" + this.adresIPPort + "/myapp/Klienci",
+            customer, {
                 params: null,
                 
                 auth: {
@@ -417,6 +444,20 @@ var DataAccess = {
             }
         );
     },
+    addOnePurchase(purchase) {
+        let purchases = [];
+        purchases.push(purchase);
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Zakupy",
+            purchases, {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    }
 }
 export default DataAccess
 //opisanie api serwera

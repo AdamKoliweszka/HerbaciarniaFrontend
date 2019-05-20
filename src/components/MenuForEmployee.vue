@@ -14,7 +14,9 @@
     </div>
     <div v-if="roleOfUser === 'KLIENT'" id="menuForEmployee" class="Menu">
       <router-link class="itemMenu" to="/herbaty">Przeglądaj herbaty</router-link>
+      <router-link class="itemMenu" to="/listaZakupow">Lista zakupów</router-link>
       <router-link class="itemMenu" to="/koszyk">Koszyk</router-link>
+      <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
       <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
     </div>
     <div v-if="roleOfUser === 'NIEZALOGOWANY'" id="menuForEmployee" class="Menu">
