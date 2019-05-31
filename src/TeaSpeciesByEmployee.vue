@@ -141,4 +141,8 @@ select{
 textarea{
   width: 100%;
 }
+input[type=button]{
+  color: white;
+  background-color: green;
+}
 </style>
