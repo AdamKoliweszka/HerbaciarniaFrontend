@@ -1,10 +1,17 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div class="Container">
-      <div class="ContainerItem">
-        <p>Edytowanie gatunku:</p>
-        <select v-model="selectedSpecies" @change="updateNameOfSpecies()" class="comboBox">
+
+    <form class="Container">
+      <fieldset>
+        <legend>Edytowanie gatunku</legend>
+        <label for="species">Gatunek:</label>
+        <select
+          id="gatunek"
+          v-model="selectedSpecies"
+          @change="updateNameOfSpecies()"
+          class="comboBox"
+        >
           <option
             v-for="TeaSpecies in species"
             :value="TeaSpecies"
@@ -12,16 +19,18 @@
           >{{TeaSpecies.name}}</option>
         </select>
         <input type="button" class="button_EdytowanieGatunkow" value="Usuń" @click="deleteSpecies">
-        <br>Nazwa gatunku:
-        <input type="text" v-model="newNameOfSpecies">
+        <label for="nameOfSpecies">Nazwa gatunku:</label>
+        <input id="nameOfSpecies" type="text" v-model="newNameOfSpecies">
         <input type="button" class="button" value="Zmień nazwe" @click="updateSpecies">
-      </div>
-      <div class="ContainerItem">
-        <p>Dodawanie gatunku:</p>Nazwa gatunku:
-        <input type="text" v-model="nameOfNewSpecies">
+      </fieldset>
+      <fieldset>
+        <legend>Dodawanie gatunku:</legend>
+        <label for="nameOfNewSpecies">Nazwa gatunku:</label>
+        <input id="nameOfNewSpecies" type="text" v-model="nameOfNewSpecies">
         <input type="button" class="button" value="Dodaj" @click="addSpecies">
-      </div>
-    </div>
+      </fieldset>
+    </form>
+
     <p
       v-for="(Comunicat,index) in comunicats"
       v-bind:key="'TeaSpeciesByEmployee'+ index + Comunicat"
@@ -61,41 +70,43 @@ export default {
     },
     deleteSpecies() {
       if (this.selectedSpecies != null) {
-        DataAccess.deleteSpecies(this.selectedSpecies.id_species).then(response => {
-          DataAccess.getSpecies().then(data => {
-            this.species = data;
+        DataAccess.deleteSpecies(this.selectedSpecies.id_species)
+          .then(response => {
+            DataAccess.getSpecies().then(data => {
+              this.species = data;
+            });
+            this.newNameOfSpecies = "";
+            this.comunicats = [];
+            this.comunicats.push(response.data);
+          })
+          .catch(error => {
+            this.comunicats = [];
+            for (var propName in error.response.data) {
+              this.comunicats.push(error.response.data[propName]);
+            }
           });
-          this.newNameOfSpecies = "";
-          this.comunicats = [];
-          this.comunicats.push(response.data);
-        }).catch(error => {
-          this.comunicats = [];
-          for (var propName in error.response.data) {
-            this.comunicats.push(error.response.data[propName]);
-          }
-        });
-        
       }
     },
     updateSpecies() {
       if (this.selectedSpecies != null) {
         this.selectedSpecies.name = this.newNameOfSpecies;
-        DataAccess.updateSpecies(this.selectedSpecies).then(response => {
-          DataAccess.getSpecies().then(data => {
-            this.species = data;
+        DataAccess.updateSpecies(this.selectedSpecies)
+          .then(response => {
+            DataAccess.getSpecies().then(data => {
+              this.species = data;
+            });
+            this.comunicats = [];
+            this.comunicats.push(response.data);
+          })
+          .catch(error => {
+            this.comunicats = [];
+            for (var propName in error.response.data) {
+              this.comunicats.push(error.response.data[propName]);
+            }
+            DataAccess.getSpecies().then(data => {
+              this.species = data;
+            });
           });
-          this.comunicats = [];
-          this.comunicats.push(response.data);
-        }).catch(error => {
-          this.comunicats = [];
-          for (var propName in error.response.data) {
-            this.comunicats.push(error.response.data[propName]);
-          }
-          DataAccess.getSpecies().then(data => {
-            this.species = data;
-          });
-        });
-        
       }
     },
     addSpecies() {
@@ -121,34 +132,13 @@ export default {
 </script>
 
 <style scoped>
-.Container {
-  background-color: yellowgreen;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 5px;
-}
-.ContainerItem {
-  flex: 1;
+input{
   width: 100%;
 }
-.Container p {
-  display: block;
-  border-style: none none solid none;
-  border-bottom-color: darkgreen;
-  color: darkgreen;
+select{
+  width: 100%;
 }
-.Container input {
-  padding-right: 20px;
-}
-.button {
-  margin-left: 10px;
-}
-.comboBox {
-  width: 100px;
-}
-
-.inputText {
-  width: 100px;
+textarea{
+  width: 100%;
 }
 </style>
