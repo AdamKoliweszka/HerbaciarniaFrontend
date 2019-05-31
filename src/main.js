@@ -59,8 +59,10 @@ const routes = [
     path: "/", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return TeaByEmployee;
+      } else if (store.getters.roleOfUser === "KLIENT") {
+        return TeaByCustomer;
       } else {
-        return NotAccess;
+        return TeaByUnregister;
       }
     }
   },
