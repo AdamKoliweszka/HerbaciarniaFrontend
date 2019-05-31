@@ -90,14 +90,11 @@ export const store = new Vuex.Store({
         }
     },
     actions: {
-        login(context, user) {
-            return DataAccess.login(user).then(data => {
-                if (data != null) {
-                    context.commit("login", user);
-                    context.commit("setRoleOfUser", data);
-                    return data;
-                }
-            });
+        setUser(context,user) {
+            context.commit("login", user);
+        },
+        setRole(context,role) {
+            context.commit("setRoleOfUser", role);
         },
         changePassword(context, newPassword) {
             context.commit("changePassword", newPassword);
