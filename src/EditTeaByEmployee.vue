@@ -1,47 +1,41 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div v-if="tea.id_tea > 0">
-      <div>
-        Nazwa:
-        <input type="text" v-model="tea.name">
-      </div>
-      <div>
-        Opis:
-        <textarea v-model="tea.description"/>
-      </div>
-      <div>
-        Cena sprzedaży:
-        <input type="number" v-model="tea.price_of_selling">
-      </div>
-      <div>
-        Cena dostawy:
-        <input type="number" v-model="tea.price_of_delivery">
-      </div>
-      <div>
-        Gatunek:
-        <select v-model="tea.tea_species" class="combo_EdytowanieGatunkow">
-          <option
-            v-for="TeaSpecies in species"
-            :value="TeaSpecies"
-            v-bind:key="'species' + TeaSpecies.name"
-          >{{TeaSpecies.name}}</option>
-        </select>
-      </div>
-      <div>
-        Kraj pochodzenia:
-        <select v-model="tea.country_of_origin" class="combo_EdytowanieKrajow">
-          <option
-            v-for="CountryOfOrigin in countries"
-            :value="CountryOfOrigin"
-            v-bind:key="'CountryOfOrigin' + CountryOfOrigin.name"
-          >{{CountryOfOrigin.name}}</option>
-        </select>
-      </div>
-      <div>
-        <input type="button" @click="edit" value="Edytuj">
-      </div>
-    </div>
+
+    <form>
+      <label for="name">Nazwa:</label>
+      <input id="name" type="text" v-model="tea.name">
+
+      <label for="description">Opis:</label>
+      <textarea id="description" v-model="tea.description"/>
+
+      <label for="sellingPrice">Cena sprzedaży:</label>
+      <input id="sellingPrice" type="number" v-model="tea.price_of_selling">
+
+      <label for="sellingProvide">Cena dostawy:</label>
+      <input id="sellingProvide" type="number" v-model="tea.price_of_delivery">
+
+      <label for="species">Gatunek:</label>
+      <select id="species" v-model="tea.tea_species" class="combo_EdytowanieGatunkow">
+        <option
+          v-for="TeaSpecies in species"
+          :value="TeaSpecies"
+          v-bind:key="'TeaSpecies' + TeaSpecies.name"
+        >{{TeaSpecies.name}}</option>
+      </select>
+
+      <label for="country">Kraj pochodzenia:</label>
+      <select id="country" v-model="tea.country_of_origin" class="combo_EdytowanieKrajow">
+        <option
+          v-for="country in countries"
+          :value="country"
+          v-bind:key="'country' + country.name"
+        >{{country.name}}</option>
+      </select>
+
+      <input type="button" @click="edit" value="Edytuj">
+    </form>
+
         <p v-for="(Comunicat,index) in comunicats" v-bind:key="'EditTeaByEmployee'+ index + Comunicat">
         {{Comunicat}}
       </p>
@@ -108,5 +102,14 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+input{
+  width: 100%;
+}
+select{
+  width: 100%;
+}
+textarea{
+  width: 100%;
+}
 </style>
