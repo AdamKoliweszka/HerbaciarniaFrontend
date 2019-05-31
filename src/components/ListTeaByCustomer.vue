@@ -38,9 +38,9 @@ export default {
 
 <style scoped>
 .itemMenu {
+  color: white;
   background-color: green;
   text-align: center;
-  color: white;
   display: block;
   text-decoration: none;
 }

@@ -6,15 +6,13 @@
         {{Provider.name}} {{Provider.surname}}
         </div>
         <div>
-          Adres:<br>
-          {{Provider.street}} 
-          {{Provider.city}}
+          Adres: {{Provider.street}} {{Provider.city}}
         </div>
         <div>
           Konto bankowe: {{Provider.account_number}}
         </div>
       <div>
-        <router-link :to="{ path:'dostawcy/'+Provider.id_provider }">Edytuj</router-link>
+        <router-link class="button" :to="{ path:'dostawcy/'+Provider.id_provider }">Edytuj</router-link>
       </div>
     </div>
   </div>
@@ -43,4 +41,14 @@ export default {
 
 <style scoped>
 
+.button{
+  display: block;
+  text-decoration: none;
+  color: white;
+  background-color: green;
+  text-align: center;
+}
+.button:hover{
+  color: black;
+}
 </style>
