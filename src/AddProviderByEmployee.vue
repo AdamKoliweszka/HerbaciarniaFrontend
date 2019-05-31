@@ -2,24 +2,27 @@
   <div id="app">
     <MenuForEmployee/>
     <form>
-      <label for="name">Imie:</label>
-      <input id="name" type="text" v-model="provider.name">
+      <fieldset>
+        <legend>Dodawanie dostawcy</legend>
+        <label for="name">Imie:</label>
+        <input id="name" type="text" v-model="provider.name">
 
-      <label for="surname">Nazwisko:</label>
-      <input id="surname" type="text" v-model="provider.surname">
+        <label for="surname">Nazwisko:</label>
+        <input id="surname" type="text" v-model="provider.surname">
 
-      <label for="street">Ulica:</label>
-      <input id="street" type="text" v-model="provider.street">
+        <label for="street">Ulica:</label>
+        <input id="street" type="text" v-model="provider.street">
 
-      <label for="city">Miasto:</label>
-      <input id="city" type="text" v-model="provider.city">
+        <label for="city">Miasto:</label>
+        <input id="city" type="text" v-model="provider.city">
 
-      <label for="accountNumber">Numer konta:</label>
-      <input id="accountNumber" type="number" v-model="provider.account_number">
+        <label for="accountNumber">Numer konta:</label>
+        <input id="accountNumber" type="number" v-model="provider.account_number">
 
-      <div>
-        <input type="button" @click="add" value="Dodaj">
-      </div>
+        <div>
+          <input type="button" @click="add" value="Dodaj">
+        </div>
+      </fieldset>
     </form>
     <p
       v-for="(Comunicat,index) in comunicats"
@@ -69,7 +72,7 @@ export default {
 
 
 <style scoped>
-input{
+input {
   width: 100%;
 }
 </style>
