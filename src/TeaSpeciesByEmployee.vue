@@ -2,7 +2,7 @@
   <div id="app">
     <MenuForEmployee/>
 
-    <form class="Container">
+    <form>
       <fieldset>
         <legend>Edytowanie gatunku</legend>
         <label for="species">Gatunek:</label>
