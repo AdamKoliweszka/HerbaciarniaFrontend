@@ -5,10 +5,10 @@
       <fieldset>
         <legend>Edytuj dane personalne</legend>
         <label for="name">Imie:</label>
-        <input id="name" type:text v-model="employee.name">
+        <input id="name" type="text" v-model="employee.name">
 
         <label for="surname">Nazwisko:</label>
-        <input id="surname" type:text v-model="employee.surname">
+        <input id="surname" type="text" v-model="employee.surname">
 
         <input type="button" value="Edytuj dane" @click="changeData">
       </fieldset>
@@ -22,10 +22,12 @@
         <input type="button" value="Edytuj hasło" @click="changePassword">
       </fieldset>
     </form>
+    <div v-if="comunicats.length > 0" class="container">
     <p
       v-for="(Comunicat,index) in comunicats"
       v-bind:key="'EditDataByEmployee'+ index + Comunicat"
     >{{Comunicat}}</p>
+    </div>
   </div>
 </template>
 
@@ -79,9 +81,7 @@ export default {
         })
         .catch(error => {
           this.comunicats = [];
-          for (var propName in error.response.data) {
-            this.comunicats.push(error.response.data[propName]);
-          }
+          this.comunicats.push("Nie prawidłowe stare hasło!");
         });
     }
   }
@@ -123,6 +123,7 @@ legend {
 }
 input[type="text"],
 input[type="number"],
+input[type="password"],
 textarea {
   border: none;
   border-bottom: solid 2px green;
