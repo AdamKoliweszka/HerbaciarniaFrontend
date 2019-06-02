@@ -44,10 +44,16 @@ export default {
   display: block;
   text-decoration: none;
 }
+.itemMenu:hover{
+  color:black;
+}
 .container {
   display: flex;
 }
 .containerElement {
   width: 50%;
+}
+h1{
+  text-align: center;
 }
 </style>
