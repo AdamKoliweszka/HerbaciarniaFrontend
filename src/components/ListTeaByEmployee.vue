@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div id="KolekcjaHerbat">
-      <div v-for="Tea in tea" v-bind:key="'Tea' + Tea.name">
-        <div></div>
+    <div >
+      <div v-for="Tea in tea" v-bind:key="'Tea' + Tea.name" class="mainContainer">
         <div>
           <h1>{{Tea.name}}</h1>
           Opis: {{Tea.description}}
@@ -37,6 +36,13 @@ export default {
 
 
 <style scoped>
+.mainContainer{
+  background-color: rgba(119, 204, 109, 0.7);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  border: 2px solid green;
+  box-shadow: 0px 0px 10px green;
+  margin: 10px;
+}
 .itemMenu {
   background-color: green;
   text-align: center;
