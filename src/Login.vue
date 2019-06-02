@@ -1,7 +1,7 @@
 <template>
   <div>
     <MenuForEmployee/>
-    <div class="Content">
+    <div class="container">
       <form>
         <label for="login">Login:</label>
         <input id="login" type="text" v-model="user.username">
@@ -53,8 +53,54 @@ export default {
 
 
 <style scoped>
-.Content {
-  padding: 5px;
+input {
+  width: 100%;
+}
+select {
+  width: 100%;
+}
+textarea {
+  width: 100%;
+}
+input[type="button"] {
+  color: white;
+  background-color: green;
+  font-size: 16px;
+}
+.container {
+  margin-top: 50px;
+  background-color: rgba(119, 204, 109, 0.7);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid green;
+  box-shadow: 0px 0px 10px green;
+  padding: 10px;
+}
+fieldset {
+  border: none;
+}
+legend {
+  text-align: center;
+}
+input[type="text"],
+input[type="password"],
+input[type="number"],
+textarea {
+  border: none;
+  border-bottom: solid 2px green;
+  background-color: transparent;
+}
+*:focus {
+  outline: none;
+}
+input[type="text"]:focus + label {
+  transform: translate3d(0, -100%, 0);
+}
+label {
+  position: relative;
 }
 </style>
 

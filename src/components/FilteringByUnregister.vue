@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div>Cena:</div>
 
     <div class="CenaFiltracja">
@@ -72,7 +72,8 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+
 
 .SzukajFiltracja{
   width:100%;
@@ -89,6 +90,12 @@ export default {
 .ItemFiltracja{
   padding-top: 5px;
 }
-
+.container{
+  background-color: rgba(119, 204, 109, 0.7);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  border: 2px solid green;
+  box-shadow: 0px 0px 10px green;
+  margin-top: 15px;
+}
 </style>
 
