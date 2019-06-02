@@ -1,40 +1,31 @@
 <template>
   <div>
     <MenuForEmployee/>
-    <div class="Content">
-      <p>Edytuj dane personalne</p>
-      <div>
-        imie:
-        <input type:text v-model="employee.name">
-      </div>
+    <form class="container">
+      <fieldset>
+        <legend>Edytuj dane personalne</legend>
+        <label for="name">Imie:</label>
+        <input id="name" type:text v-model="employee.name">
 
-      <div>
-        nazwisko:
-        <input type:text v-model="employee.surname">
-      </div>
-      <div>
+        <label for="surname">Nazwisko:</label>
+        <input id="surname" type:text v-model="employee.surname">
+
         <input type="button" value="Edytuj dane" @click="changeData">
-      </div>
-    </div>
-    <div class="Content">
-      <p>Zmiana hasła</p>
-      <div>
-        Stare hasło:
-        <input type="password" v-model="oldPassword">
-      </div>
-      <div>
-        Nowe hasło:
-        <input type="password" v-model="newPassword">
-      </div>
-      <div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Zmiana hasła</legend>
+        <label for="oldPassword">Stare hasło:</label>
+        <input id="oldPassword" type="password" v-model="oldPassword">
+        <label for="newPassword">Nowe hasło:</label>
+        <input id="newPassword" type="password" v-model="newPassword">
         <input type="button" value="Edytuj hasło" @click="changePassword">
-      </div>
-      
-    </div>
+      </fieldset>
+    </form>
     <p
-        v-for="(Comunicat,index) in comunicats"
-        v-bind:key="'EditDataByEmployee'+ index + Comunicat"
-      >{{Comunicat}}</p>
+      v-for="(Comunicat,index) in comunicats"
+      v-bind:key="'EditDataByEmployee'+ index + Comunicat"
+    >{{Comunicat}}</p>
   </div>
 </template>
 
@@ -84,7 +75,7 @@ export default {
         .then(response => {
           this.comunicats = [];
           this.comunicats.push(response.data);
-          this.$store.dispatch('changePassword',this.newPassword);
+          this.$store.dispatch("changePassword", this.newPassword);
         })
         .catch(error => {
           this.comunicats = [];
@@ -99,14 +90,52 @@ export default {
 
 
 <style scoped>
-.Content {
-  padding: 5px;
+input {
+  width: 100%;
 }
-.Content p {
-  display: block;
-  border-style: none none solid none;
-  border-bottom-color: darkgreen;
-  color: darkgreen;
+select {
+  width: 100%;
+}
+textarea {
+  width: 100%;
+}
+input[type="button"] {
+  color: white;
+  background-color: green;
+  font-size: 16px;
+}
+.container {
+  margin-top: 50px;
+  background-color: rgba(119, 204, 109, 0.7);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid green;
+  box-shadow: 0px 0px 10px green;
+}
+fieldset {
+  border: none;
+}
+legend {
+  text-align: center;
+}
+input[type="text"],
+input[type="number"],
+textarea {
+  border: none;
+  border-bottom: solid 2px green;
+  background-color: transparent;
+}
+*:focus {
+  outline: none;
+}
+input[type="text"]:focus + label {
+  transform: translate3d(0, -100%, 0);
+}
+label {
+  position: relative;
 }
 </style>
 
