@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div v-for="Delivery in deliveries" v-bind:key="'Delivery' + Delivery.id_delivery" class="container">
+    <div
+      v-for="Delivery in deliveries"
+      v-bind:key="'Delivery' + Delivery.id_delivery"
+      class="container"
+    >
       <div>Numer dostawy: {{Delivery.id_delivery}}</div>
       <div>
         Dostawca:
@@ -17,13 +21,21 @@
       </div>
       <div>
         <select v-model="Delivery.status">
-          <option v-for="Status in statuses" v-bind:key="'Status' + Status.id_status" :value="Status">{{Status.name}}</option>
+          <option
+            v-for="Status in statuses"
+            v-bind:key="'Status' + Status.id_status"
+            :value="Status"
+          >{{Status.name}}</option>
         </select>
-        <input type="button" value="Zaaktualizuj status" @click="updateStatus(Delivery)"/>
+        <input type="button" value="Zaaktualizuj status" @click="updateStatus(Delivery)">
       </div>
-      <div></div>
     </div>
-    
+    <div v-if="comunicats.length > 0" class="container">
+      <p
+        v-for="(Comunicat,index) in comunicats"
+        v-bind:key="'EditDataByEmployee'+ index + Comunicat"
+      >{{Comunicat}}</p>
+    </div>
   </div>
 </template>
 
@@ -36,15 +48,23 @@ export default {
     MenuForEmployee
   },
   methods: {
-    updateStatus(Delivery)
-    {
-      DataAccess.updateDelivery(Delivery);
+    updateStatus(Delivery) {
+      DataAccess.updateDelivery(Delivery)
+        .then(response => {
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+        })
+        .catch(error => {
+          this.comunicats = [];
+          this.comunicats.push(error.response.data);
+        });
     }
   },
   data: function() {
     return {
       deliveries: [],
-      statuses: []
+      statuses: [],
+      comunicats: []
     };
   },
   mounted() {
