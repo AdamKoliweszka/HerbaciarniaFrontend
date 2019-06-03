@@ -1,16 +1,41 @@
 <template>
   <div id="app">
-    <nav v-if="roleOfUser === 'PRACOWNIK'" id="menuForEmployee" class="Menu">
-      <router-link class="itemMenu" to="/herbaty">Edytowanie herbat</router-link>
-      <router-link class="itemMenu" to="/dodawanieHerbaty">Dodawanie herbaty</router-link>
-      <router-link class="itemMenu" to="/dodawanieDostawcy">Dodawanie dostawcy</router-link>
-      <router-link class="itemMenu" to="/gatunki">Edytowanie gatunków</router-link>
-      <router-link class="itemMenu" to="/kraje">Edytowanie krajów</router-link>
-      <router-link class="itemMenu" to="/dostawcy">Lista dostawców</router-link>
-      <router-link class="itemMenu" to="/listaDostaw">Lista dostaw</router-link>
-      <router-link class="itemMenu" to="/listaZakupow">Lista zakupów</router-link>
-      <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
-      <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
+    <nav v-if="roleOfUser === 'PRACOWNIK'" class="Menu">
+      <div class="complexSubMenu">
+        Zarządzanie herbatami
+        <div class="dropMenu">
+          <router-link class="complexMenuItem" to="/herbaty">Edytowanie herbat</router-link>
+          <router-link class="complexMenuItem" to="/dodawanieHerbaty">Dodawanie herbaty</router-link>
+        </div>
+      </div>
+      <div class="complexSubMenu">
+        Zarządzanie dostawami
+        <div class="dropMenu">
+          <router-link class="complexMenuItem" to="/dodawanieDostawcy">Dodawanie dostawcy</router-link>
+          <router-link class="complexMenuItem" to="/dostawcy">Lista dostawców</router-link>
+          <router-link class="complexMenuItem" to="/listaDostaw">Lista dostaw</router-link>
+        </div>
+      </div>
+      <div class="complexSubMenu">
+        Edycja danych
+        <div class="dropMenu">
+          <router-link class="complexMenuItem" to="/gatunki">Edytowanie gatunków</router-link>
+          <router-link class="complexMenuItem" to="/kraje">Edytowanie krajów</router-link>
+        </div>
+      </div>
+      <div class="complexSubMenu">
+        Lista Zakupów
+        <div class="dropMenu">
+          <router-link class="complexMenuItem" to="/listaZakupow">Lista zakupów</router-link>
+        </div>
+      </div>
+      <div class="complexSubMenu">
+        Zarządzanie kontem
+        <div class="dropMenu">
+          <router-link class="complexMenuItem" to="/edytujDane">Edytuj dane</router-link>
+          <router-link class="complexMenuItem" to="/wyloguj">Wyloguj</router-link>
+        </div>
+      </div>
     </nav>
     <nav v-if="roleOfUser === 'KLIENT'" id="menuForEmployee" class="Menu">
       <router-link class="itemMenu" to="/herbaty">Przeglądaj herbaty</router-link>
@@ -24,14 +49,13 @@
       <router-link class="itemMenu" to="/rejestracja">Rejestracja</router-link>
       <router-link class="itemMenu" to="/login">Zaloguj</router-link>
     </nav>
-    <div class="GapBar"></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "MenuForEmployee",
-  computed:{
+  computed: {
     username() {
       return this.$store.getters.username;
     },
@@ -44,6 +68,36 @@ export default {
 
 
 <style scoped>
+
+.complexSubMenu:hover .dropMenu {
+  display: block;
+}
+.complexSubMenu {
+  position: relative;
+  display: inline-block;
+  min-width: 20%;
+}
+.dropMenu {
+  display: none;
+  position: absolute;
+  background-color: green;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+.dropMenu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.complexMenu {
+  background-color: green;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 5vh;
+}
 .itemMenu {
   background-color: green;
   text-align: center;
@@ -53,19 +107,19 @@ export default {
   display: block;
   text-decoration: none;
 }
-.itemMenu:hover {
-  padding-top: 5vh;
-}
 
 .Menu {
   width: 100vw;
   height: 5vh;
   position: fixed;
+  top: 0px;
+  left: 0px;
   background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5vh;
+  z-index: 1;
 }
 .GapBar {
   width: 100vw;
