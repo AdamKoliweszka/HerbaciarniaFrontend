@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <MenuForEmployee/>
-    <div v-for="Purchase in purchases" v-bind:key="'Purchase' + Purchase.id_purchase" class="container">
+    <div
+      v-for="Purchase in purchases"
+      v-bind:key="'Purchase' + Purchase.id_purchase"
+      class="container"
+    >
       <div>Numer zamówienia: {{Purchase.id_purchase}}</div>
       <div>
         Kupujący:
@@ -16,11 +20,20 @@
       </div>
       <div>
         <select v-model="Purchase.status">
-          <option v-for="Status in statuses" v-bind:key="'Status' + Status.id_status" :value="Status">{{Status.name}}</option>
+          <option
+            v-for="Status in statuses"
+            v-bind:key="'Status' + Status.id_status"
+            :value="Status"
+          >{{Status.name}}</option>
         </select>
-        <input type="button" value="Zaaktualizuj status" @click="updateStatus(Purchase)"/>
+        <input type="button" value="Zaaktualizuj status" @click="updateStatus(Purchase)">
       </div>
-      <div></div>
+    </div>
+    <div v-if="comunicats.length > 0" class="container">
+      <p
+        v-for="(Comunicat,index) in comunicats"
+        v-bind:key="'EditDataByEmployee'+ index + Comunicat"
+      >{{Comunicat}}</p>
     </div>
   </div>
 </template>
@@ -34,22 +47,28 @@ export default {
     MenuForEmployee
   },
   methods: {
-    updateStatus(Purchase)
-    {
-      DataAccess.updatePurchase(Purchase);
+    updateStatus(Purchase) {
+      DataAccess.updatePurchase(Purchase)
+        .then(response => {
+          this.comunicats = [];
+          this.comunicats.push(response.data);
+        })
+        .catch(error => {
+          this.comunicats = [];
+          this.comunicats.push(error.response.data);
+        });
     }
   },
   data: function() {
     return {
       purchases: [],
-      statuses: []
+      statuses: [],
+      comunicats: []
     };
   },
   mounted() {
     DataAccess.getPurchases().then(data => {
       this.purchases = data;
-      console.log(this.purchases)
-      
     });
     DataAccess.getStatuses().then(data => {
       this.statuses = data;
