@@ -4,25 +4,21 @@
     <div class="Content">
     <form class="container">
         <label for="login">Login:</label>
-        <input id="login" type="text" v-model="customer.user.username">
+        <input id="login" type="text" v-model="employee.user.username">
         <label for="password">Hasło:</label>
-        <input type="password" v-model="customer.user.password">
+        <input type="password" v-model="employee.user.password">
         <label for="name">Imie:</label>
-        <input id="name" type="text" v-model="customer.name">
+        <input id="name" type="text" v-model="employee.name">
         <label for="surname">Nazwisko:</label>
-        <input id="surname" type="text" v-model="customer.surname">
-        <label for="street">Ulica:</label>
-        <input id="street" type="text" v-model="customer.street">
-        <label for="city">Miejscowość:</label>
-        <input id="city" type="text" v-model="customer.city">
+        <input id="surname" type="text" v-model="employee.surname">
         <input type="button" value="Rejestruj" @click="register"/>
       </form>
     </div>
     <div v-if="comunicats.length > 0" class="container">
-      <p v-for="(Comunicat,index) in comunicats" v-bind:key="'RegistrationByCustomer'+ index + Comunicat">
+      <p v-for="(Comunicat,index) in comunicats" v-bind:key="'RegistrationByEmployee'+ index + Comunicat">
         {{Comunicat}}
       </p>
-    </div>
+      </div>
     </div>
  
 </template>
@@ -31,13 +27,13 @@
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
-  name: "RegistrationByCustomer",
+  name: "RegistrationByemployee",
   components: {
     MenuForEmployee
   },
   data: function() {
     return {
-      customer: {
+      employee: {
         name: "",
         surname: "",
         city: "",
@@ -54,7 +50,7 @@ export default {
   },
   methods: {
     register() {
-      DataAccess.addCustomer(this.customer)
+      DataAccess.addEmployee(this.employee)
         .then(response => {
           this.comunicats = [];
           this.registerComplete();
@@ -68,7 +64,7 @@ export default {
         });
     },
     registerComplete() {
-      this.customer = {
+      this.employee = {
         name: "",
         surname: "",
         city: "",

@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="complexSubMenu">
-        Lista Zakupów
+        Zarządzanie zakupami
         <div class="dropMenu">
           <router-link class="complexMenuItem" to="/listaZakupow">Lista zakupów</router-link>
         </div>
@@ -34,6 +34,7 @@
         Zarządzanie kontem
         <div class="dropMenu">
           <router-link class="complexMenuItem" to="/edytujDane">Edytuj dane</router-link>
+          <router-link class="complexMenuItem" to="/dodajPracownika">Dodaj pracownika</router-link>
           <router-link class="complexMenuItem" to="/wyloguj">Wyloguj</router-link>
         </div>
       </div>
@@ -76,9 +77,12 @@ export default {
 .complexSubMenu {
   position: relative;
   display: inline-block;
-  min-width: 20%;
+  width: 20%;
+
+  text-align: center;
 }
 .dropMenu {
+  width: 100%;
   display: none;
   position: absolute;
   background-color: green;

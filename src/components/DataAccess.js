@@ -445,6 +445,20 @@ var DataAccess = {
             return response;
         });
     },
+    addEmployee(employee) {
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Pracownicy", employee,
+            {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        ).then(response => {
+            return response;
+        });
+    },
     addAllPurchases() {
         return axios.post(
             "http://" + this.adresIPPort + "/myapp/Zakupy",

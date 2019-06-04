@@ -23,6 +23,7 @@ import PurchasesByEmployee from "./PurchasesByEmployee.vue";
 import PurchasesByCustomer from "./PurchasesByCustomer.vue";
 import DeliveriesByEmployee from "./DeliveriesByEmployee.vue";
 import RegistrationByCustomer from "./RegistrationByCustomer.vue";
+import RegistrationEmployeeByEmployee from "./RegistrationEmployeeByEmployee.vue";
 import ShoppingCartByCustomer from "./ShoppingCartByCustomer.vue";
 import { store } from "./store.js"
 
@@ -93,6 +94,15 @@ const routes = [
     path: "/gatunki", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return TeaSpeciesByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/dodajPracownika", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return RegistrationEmployeeByEmployee;
       } else {
         return NotAccess;
       }
