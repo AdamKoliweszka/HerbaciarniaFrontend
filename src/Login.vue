@@ -12,7 +12,6 @@
         <input type="button" @click="login" value="Zaloguj"/>
       </form>
     </div>
-    {{comunicat}}
   </div>
 </template>
 
@@ -30,8 +29,7 @@ export default {
       user: {
         username: "",
         password: ""
-      },
-      comunicat: ""
+      }
     };
   },
   methods: {
@@ -40,7 +38,6 @@ export default {
                 if (data != null) {
                     this.$store.dispatch('setUser',this.user);
                     this.$store.dispatch('setRole',data);
-                    this.comunicat = "Poprawnie zalogowano!";
                     this.$router.go();
                 }
         }).catch(error => {
