@@ -84,6 +84,7 @@ input[type="button"] {
   margin-right: auto;
   border: 2px solid green;
   box-shadow: 0px 0px 10px green;
+  padding: 10px;
 }
 fieldset {
   border: none;

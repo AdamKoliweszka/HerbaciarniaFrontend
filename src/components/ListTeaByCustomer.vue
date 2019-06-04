@@ -42,6 +42,7 @@ export default {
   border: 2px solid green;
   box-shadow: 0px 0px 10px green;
   margin: 10px;
+  padding: 10px;
 }
 .itemMenu {
   background-color: green;
@@ -68,5 +69,10 @@ input[type="button"]
   color: white;
   width: 100%;
   background-color: green;
+}
+input[type="number"]
+{
+  background: transparent;
+  border-color: green;
 }
 </style>
