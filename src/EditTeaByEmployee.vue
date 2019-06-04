@@ -108,6 +108,10 @@ export default {
 
 
 <style scoped>
+select{
+  background: transparent;
+  border: solid 2px green;
+}
 input {
   width: 100%;
 }
