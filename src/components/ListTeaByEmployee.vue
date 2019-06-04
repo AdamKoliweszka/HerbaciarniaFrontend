@@ -1,23 +1,29 @@
 <template>
   <div>
-    <div >
+  <div id="KolekcjaHerbat">
       <div v-for="Tea in tea" v-bind:key="'Tea' + Tea.name" class="mainContainer">
-        <div>
+          <div class="flexContainer">
+          <div class="leftFlex">
+          <img :src="'data:image/jpg;base64,' + Tea.image" class="imgClass"/>
+          </div>
+
+          <div class="rightFlex">
           <h1>{{Tea.name}}</h1>
           Opis: {{Tea.description}}
-          <div class="container">
-            <div class="containerElement">Kraj pochodzenia: {{Tea.country_of_origin.name}}</div>
-            <div class="containerElement">Gatunek: {{Tea.tea_species.name}}</div>
+          <br>
+          Kraj pochodzenia: {{Tea.country_of_origin.name}}
+          Gatunek: {{Tea.tea_species.name}}
+          <br>
+          Cena: {{Tea.price_of_selling}}
+          Ilosc: {{Tea.available_quantity}}
           </div>
-          <div class="container">
-            <div class="containerElement">Cena: {{Tea.price_of_selling}}</div>
-            <div class="containerElement">Ilosc: {{Tea.available_quantity}}</div>
           </div>
+
           <router-link class="itemMenu" :to="{ path:'/herbaty/'+Tea.id_tea }">Edytuj</router-link>
-        </div>
+        
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -36,6 +42,20 @@ export default {
 
 
 <style scoped>
+.imgClass{
+  width: 100%;
+}
+.rightFlex{
+  width: 70%;
+  text-align: center;
+}
+.leftFlex{
+  width: 30%;
+}
+.flexContainer{
+  display: flex;
+  flex-direction: row;
+}
 .mainContainer{
   background-color: rgba(119, 204, 109, 0.7);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
