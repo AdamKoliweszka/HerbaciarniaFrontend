@@ -78,6 +78,7 @@ export default {
 .SzukajFiltracja{
   width:100%;
   background-color: green;
+  color: white;
 }
 .ListaFiltracja{
   padding-top: 5px;

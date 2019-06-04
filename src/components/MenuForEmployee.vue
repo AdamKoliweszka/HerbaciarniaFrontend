@@ -38,6 +38,7 @@
           <router-link class="complexMenuItem" to="/wyloguj">Wyloguj</router-link>
         </div>
       </div>
+      
     </nav>
     <nav v-if="roleOfUser === 'KLIENT'" id="menuForEmployee" class="Menu">
       <router-link class="itemMenu" to="/herbaty">Przeglądaj herbaty</router-link>
@@ -51,6 +52,7 @@
       <router-link class="itemMenu" to="/rejestracja">Rejestracja</router-link>
       <router-link class="itemMenu" to="/login">Zaloguj</router-link>
     </nav>
+    <div class="GapBar"></div>
   </div>
 </template>
 
@@ -78,7 +80,7 @@ export default {
   position: relative;
   display: inline-block;
   width: 20%;
-
+  color: white;
   text-align: center;
 }
 .dropMenu {
@@ -89,7 +91,7 @@ export default {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 .dropMenu a {
-  color: black;
+  color: white;
   padding: 12px 16px;
   text-decoration: none;
   display: block;

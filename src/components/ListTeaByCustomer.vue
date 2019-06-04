@@ -2,7 +2,6 @@
   <div>
   <div id="KolekcjaHerbat">
       <div v-for="Purchase in purchases" v-bind:key="'Purchase' + Purchase.tea.name" class="mainContainer">
-        <div></div>
         <div>
           <h1>{{Purchase.tea.name}}</h1>
           Opis: {{Purchase.tea.description}}
@@ -56,6 +55,7 @@ export default {
 }
 .container {
   display: flex;
+  color: white;
 }
 .containerElement {
   width: 50%;
@@ -65,6 +65,7 @@ h1{
 }
 input[type="button"]
 {
+  color: white;
   width: 100%;
   background-color: green;
 }
