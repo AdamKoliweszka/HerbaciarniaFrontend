@@ -2,8 +2,12 @@
   <div>
   <div id="KolekcjaHerbat">
       <div v-for="Tea in tea" v-bind:key="'Tea' + Tea.name" class="mainContainer">
-        <div></div>
-        <div>
+          <div class="flexContainer">
+          <div class="leftFlex">
+          <img :src="'data:image/jpg;base64,' + Tea.image" class="imgClass"/>
+          </div>
+
+          <div class="rightFlex">
           <h1>{{Tea.name}}</h1>
           Opis: {{Tea.description}}
           <br>
@@ -12,7 +16,9 @@
           <br>
           Cena: {{Tea.price_of_selling}}
           Ilosc: {{Tea.available_quantity}}
-        </div>
+          </div>
+          </div>
+        
       </div>
     </div>
     </div>
@@ -20,21 +26,35 @@
 
 <script>
 export default {
-  name: 'ListTeaByUnregister',
+  name: "ListTeaByUnregister",
   props: {
     tea: null
   },
-  computed:{
-  roleOfUser() {
+  computed: {
+    roleOfUser() {
       return this.$store.getters.roleOfUser;
     }
   }
-}
+};
 </script>
 
 
 <style scoped>
-.mainContainer{
+.imgClass{
+  width: 100%;
+}
+.rightFlex{
+  width: 70%;
+  text-align: center;
+}
+.leftFlex{
+  width: 30%;
+}
+.flexContainer{
+  display: flex;
+  flex-direction: row;
+}
+.mainContainer {
   background-color: rgba(119, 204, 109, 0.7);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
   border: 2px solid green;
@@ -49,8 +69,8 @@ export default {
   display: block;
   text-decoration: none;
 }
-.itemMenu:hover{
-  color:black;
+.itemMenu:hover {
+  color: black;
 }
 .container {
   display: flex;
@@ -58,7 +78,7 @@ export default {
 .containerElement {
   width: 50%;
 }
-h1{
+h1 {
   text-align: center;
 }
 </style>
