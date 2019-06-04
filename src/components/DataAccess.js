@@ -407,6 +407,19 @@ var DataAccess = {
             }
         );
     },
+    addDelivery(delivery) {
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Dostawy",
+            delivery, {
+                params: null,
+                
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
     getDeliveries() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Dostawy",

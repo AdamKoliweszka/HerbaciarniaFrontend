@@ -12,6 +12,7 @@
         Zarządzanie dostawami
         <div class="dropMenu">
           <router-link class="complexMenuItem" to="/dodawanieDostawcy">Dodawanie dostawcy</router-link>
+          <router-link class="complexMenuItem" to="/dodawanieDostawy">Dodawanie dostawy</router-link>
           <router-link class="complexMenuItem" to="/dostawcy">Lista dostawców</router-link>
           <router-link class="complexMenuItem" to="/listaDostaw">Lista dostaw</router-link>
         </div>

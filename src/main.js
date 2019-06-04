@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
+import AddDeliverByEmployee from './AddDeliverByEmployee.vue';
 import TeaByEmployee from "./TeaByEmployee.vue";
 import TeaByUnregister from "./TeaByUnregister.vue";
 import TeaByCustomer from "./TeaByCustomer.vue";
@@ -137,6 +138,15 @@ const routes = [
     path: "/dodawanieDostawcy", get component() {
       if (store.getters.roleOfUser === "PRACOWNIK") {
         return AddProviderByEmployee;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/dodawanieDostawy", get component() {
+      if (store.getters.roleOfUser === "PRACOWNIK") {
+        return AddDeliverByEmployee;
       } else {
         return NotAccess;
       }
