@@ -35,6 +35,10 @@
           >{{country.name}}</option>
         </select>
 
+        <label for="file" class="fileSender">Wczytaj plik</label>
+         <input accept=".jpg, .png" type="file" id="file" ref="file" @change="handleFileUpload()">
+        <img ref="obrazPodglad" :src="'data:image/jpg;base64,' + tea.image" class="imgContainer"/>
+
         <input type="button" @click="edit" value="Edytuj">
       </fieldset>
     </form>
@@ -48,6 +52,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
@@ -77,7 +82,8 @@ export default {
         price_of_delivery: 0,
         available_quantity: 0,
         tea_species: null,
-        country_of_origin: null
+        country_of_origin: null,
+        image: null
       },
       species: null,
       countries: null,
@@ -93,6 +99,7 @@ export default {
           .then(response => {
             this.comunicats = [];
             this.comunicats.push(response.data);
+            this.submitFile(this.tea.id_tea);
           })
           .catch(error => {
             this.comunicats = [];
@@ -101,6 +108,43 @@ export default {
             }
           });
       }
+    },
+    submitFile(idNumber) {
+      let formData = new FormData();
+      const url = `http://localhost:8086/myapp/Plik/` + idNumber;
+      formData.append("file", this.file);
+      let comunicats = this.comunicats;
+      axios
+        .post(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
+          params: null,
+          auth: {
+            username: this.$store.getters.username,
+            password: this.$store.getters.password
+          }
+        })
+        .then(function() {
+          /*
+          while (comunicats.length > 0) comunicats.pop();
+          comunicats.push("Plik wysłany poprawnie!");
+          */
+        })
+        .catch(function() {
+          /*
+          while (comunicats.length > 0) comunicats.pop();
+          comunicats.push("Plik nie wysłany!");
+          */
+        });
+    },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        this.$refs.obrazPodglad.setAttribute('src',e.target.result);
+      };
+      reader.readAsDataURL(this.$refs.file.files[0]);
     }
   }
 };
@@ -108,6 +152,20 @@ export default {
 
 
 <style scoped>
+.fileSender{
+  display: block;
+  background-color:green;
+  text-align: center;
+  color: white;
+  box-shadow: 0px 0px 3px white;
+}
+input[type="file"]
+{
+  display: none;
+}
+.imgContainer{
+  width: 100%;
+}
 select{
   background: transparent;
   border: solid 2px green;

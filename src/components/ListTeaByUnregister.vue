@@ -1,27 +1,26 @@
 <template>
   <div>
-  <div id="KolekcjaHerbat">
+    <div id="KolekcjaHerbat">
       <div v-for="Tea in tea" v-bind:key="'Tea' + Tea.name" class="mainContainer">
-          <div class="flexContainer">
+        <div class="flexContainer">
           <div class="leftFlex">
-          <img :src="'data:image/jpg;base64,' + Tea.image" class="imgClass"/>
+            <img :src="'data:image/jpg;base64,' + Tea.image" class="imgClass">
           </div>
 
           <div class="rightFlex">
-          <h1>{{Tea.name}}</h1>
-          Opis: {{Tea.description}}
-          <br>
-          Kraj pochodzenia: {{Tea.country_of_origin.name}}
-          Gatunek: {{Tea.tea_species.name}}
-          <br>
-          Cena: {{Tea.price_of_selling}}
-          Ilosc: {{Tea.available_quantity}}
+            <h1>{{Tea.name}}</h1>
+            Opis: {{Tea.description}}
+            <br>
+            Kraj pochodzenia: {{Tea.country_of_origin.name}}
+            Gatunek: {{Tea.tea_species.name}}
+            <br>
+            Cena: {{Tea.price_of_selling}}
+            Ilosc: {{Tea.available_quantity}}
           </div>
-          </div>
-        
+        </div>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -40,17 +39,17 @@ export default {
 
 
 <style scoped>
-.imgClass{
+.imgClass {
   width: 100%;
 }
-.rightFlex{
+.rightFlex {
   width: 70%;
   text-align: center;
 }
-.leftFlex{
+.leftFlex {
   width: 30%;
 }
-.flexContainer{
+.flexContainer {
   display: flex;
   flex-direction: row;
 }

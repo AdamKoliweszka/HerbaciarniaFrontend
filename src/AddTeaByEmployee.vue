@@ -33,10 +33,13 @@
             v-bind:key="'country' + country.name"
           >{{country.name}}</option>
         </select>
-
+        <label for="file" class="fileSender">Wczytaj plik</label>
+         <input accept=".jpg, .png" type="file" id="file" ref="file" @change="handleFileUpload()">
+        <img ref="obrazPodglad" class="imgContainer"/>
         <input type="button" @click="addTea" value="Dodawanie">
       </fieldset>
     </form>
+   
     <div v-if="comunicats.length > 0" class="container">
       <p
         v-for="(Comunicat,index) in comunicats"
@@ -47,6 +50,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import MenuForEmployee from "@/components/MenuForEmployee.vue";
 import DataAccess from "@/components/DataAccess.js";
 export default {
@@ -76,7 +80,8 @@ export default {
       },
       species: null,
       countries: null,
-      comunicats: []
+      comunicats: [],
+      file: ""
     };
   },
   methods: {
@@ -84,8 +89,8 @@ export default {
       DataAccess.addTea(this.tea)
         .then(response => {
           this.comunicats = [];
-          this.comunicats.push(response.data);
-          this.clear();
+          this.comunicats.push("Udało się dodać herbate!");
+          this.submitFile(response.data);
         })
         .catch(error => {
           this.comunicats = [];
@@ -93,6 +98,7 @@ export default {
             this.comunicats.push(error.response.data[propName]);
           }
         });
+        
     },
     clear() {
       this.tea = {
@@ -105,6 +111,44 @@ export default {
         tea_species: null,
         country_of_origin: null
       };
+    },
+    submitFile(idNumber) {
+      let formData = new FormData();
+      const url = `http://localhost:8086/myapp/Plik/` + idNumber;
+      formData.append("file", this.file);
+      let comunicats = this.comunicats;
+      axios
+        .post(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
+          params: null,
+          auth: {
+            username: this.$store.getters.username,
+            password: this.$store.getters.password
+          }
+        })
+        .then(function() {
+          /*
+          while (comunicats.length > 0) comunicats.pop();
+          comunicats.push("Plik wysłany poprawnie!");
+          */
+        })
+        .catch(function() {
+          /*
+          while (comunicats.length > 0) comunicats.pop();
+          comunicats.push("Plik nie wysłany!");
+          */
+        });
+    },
+
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        this.$refs.obrazPodglad.setAttribute('src',e.target.result);
+      };
+      reader.readAsDataURL(this.$refs.file.files[0]);
     }
   }
 };
@@ -112,7 +156,21 @@ export default {
 
 
 <style scoped>
-select{
+.fileSender{
+  display: block;
+  background-color:green;
+  text-align: center;
+  color: white;
+  box-shadow: 0px 0px 10px white;
+}
+input[type="file"]
+{
+  display: none;
+}
+.imgContainer{
+  width: 100%;
+}
+select {
   background: transparent;
   border: solid 2px green;
 }
