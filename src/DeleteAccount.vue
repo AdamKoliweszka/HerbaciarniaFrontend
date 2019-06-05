@@ -1,7 +1,9 @@
 <template>
   <div>
     <MenuForEmployee/>
-    <input type="button" value="Usuń konto" @click="deleteAccount"/>
+    <div class="container">
+      <input type="button" value="Usuń konto" @click="deleteAccount">
+    </div>
   </div>
 </template>
 
@@ -14,14 +16,14 @@ export default {
     MenuForEmployee
   },
   methods: {
-    deleteAccount(){
-      DataAccess.deleteAccount().then(response => {
-        console.log("Usunięto");
-        this.$store.commit('logout');
-        this.$router.go();
-      }).catch(error => {
-        
-      });
+    deleteAccount() {
+      DataAccess.deleteAccount()
+        .then(response => {
+          console.log("Usunięto");
+          this.$store.commit("logout");
+          this.$router.go();
+        })
+        .catch(error => {});
     }
   }
 };
@@ -29,6 +31,17 @@ export default {
 
 
 <style scoped>
-
+.container {
+  width: 100%;
+  margin-top: 10px;
+}
+input {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: green;
+  color: white;
+  display: block;
+}
 </style>
 

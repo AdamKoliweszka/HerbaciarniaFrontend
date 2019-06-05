@@ -35,7 +35,7 @@
         <div class="dropMenu">
           <router-link class="complexMenuItem" to="/edytujDane">Edytuj dane</router-link>
           <router-link class="complexMenuItem" to="/dodajPracownika">Dodaj pracownika</router-link>
-          <router-link class="itemMenu" to="/usunKonto">Usuń konto</router-link>
+          <router-link class="complexMenuItem" to="/usunKonto">Usuń konto</router-link>
           <router-link class="complexMenuItem" to="/wyloguj">Wyloguj</router-link>
         </div>
       </div>
@@ -110,11 +110,10 @@ export default {
 .itemMenu {
   background-color: green;
   text-align: center;
-  border-style: none solid none solid;
-  border-color: darkgreen;
   color: white;
   display: block;
   text-decoration: none;
+  width: 15%;
 }
 
 .Menu {
