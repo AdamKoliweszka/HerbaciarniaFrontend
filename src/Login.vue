@@ -12,6 +12,12 @@
         <input type="button" @click="login" value="Zaloguj"/>
       </form>
     </div>
+    <div v-if="comunicats.length > 0" class="container">
+      <p
+        v-for="(Comunicat,index) in comunicats"
+        v-bind:key="'EditTeaByEmployee'+ index + Comunicat"
+      >{{Comunicat}}</p>
+    </div>
   </div>
 </template>
 
@@ -29,7 +35,8 @@ export default {
       user: {
         username: "",
         password: ""
-      }
+      },
+      comunicats: []
     };
   },
   methods: {
@@ -41,7 +48,8 @@ export default {
                     this.$router.go();
                 }
         }).catch(error => {
-            this.comunicat = "Niepoprawne dane logowania!";
+          this.comunicats = [];
+            this.comunicats.push( "Niepoprawne dane logowania!" );
         });
       }
   }

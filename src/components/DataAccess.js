@@ -17,6 +17,18 @@ var DataAccess = {
             return response.data;
         });
     },
+    deleteAccount() {
+        return axios.get(
+            "http://" + this.adresIPPort + "/myapp/deleteAccount",
+            {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
     getAllTea() {
         return axios
             .get("http://" + this.adresIPPort + "/myapp/Herbaty/Wszystkie", {

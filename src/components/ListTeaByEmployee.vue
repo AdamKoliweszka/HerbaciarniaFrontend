@@ -14,7 +14,8 @@
           Kraj pochodzenia: {{Tea.country_of_origin.name}}
           Gatunek: {{Tea.tea_species.name}}
           <br>
-          Cena: {{Tea.price_of_selling}}
+          Cena sprzedaży: {{Tea.price_of_selling}}
+          Cena dostawy: {{Tea.price_of_delivery}}<br>
           Ilosc: {{Tea.available_quantity}}
           </div>
           </div>

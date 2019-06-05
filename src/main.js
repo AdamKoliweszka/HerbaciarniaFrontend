@@ -15,6 +15,7 @@ import ProvidersByEmployee from "./ProvidersByEmployee.vue";
 import Login from "./Login.vue";
 import NotAccess from "./NotAccess.vue";
 import Logout from "./Logout.vue";
+import DeleteAccount from "./DeleteAccount.vue";
 import UserIsLogin from "./UserIsLogin.vue";
 import UserIsLogout from "./UserIsLogout.vue";
 import EditDataOfEmployee from "./EditDataOfEmployee.vue";
@@ -54,6 +55,15 @@ const routes = [
         return UserIsLogout;
       } else {
         return Logout;
+      }
+    }
+  },
+  {
+    path: "/usunKonto", get component() {
+      if (store.getters.roleOfUser === "NIEZALOGOWANY") {
+        return NotAccess;
+      } else {
+        return DeleteAccount;
       }
     }
   },

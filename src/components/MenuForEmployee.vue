@@ -35,6 +35,7 @@
         <div class="dropMenu">
           <router-link class="complexMenuItem" to="/edytujDane">Edytuj dane</router-link>
           <router-link class="complexMenuItem" to="/dodajPracownika">Dodaj pracownika</router-link>
+          <router-link class="itemMenu" to="/usunKonto">Usuń konto</router-link>
           <router-link class="complexMenuItem" to="/wyloguj">Wyloguj</router-link>
         </div>
       </div>
@@ -45,6 +46,7 @@
       <router-link class="itemMenu" to="/listaZakupow">Lista zakupów</router-link>
       <router-link class="itemMenu" to="/koszyk">Koszyk</router-link>
       <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
+      <router-link class="itemMenu" to="/usunKonto">Usuń konto</router-link>
       <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
     </nav>
     <nav v-if="roleOfUser === 'NIEZALOGOWANY'" id="menuForEmployee" class="Menu">
