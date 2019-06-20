@@ -119,7 +119,7 @@
       </ul>
     </div>
   </nav>
-  <nav v-if="roleOfUser === 'NIEZALOGOWANY'" class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav v-if="roleOfUser === 'NIEZALOGOWANY'" class="navbar navbar-expand-lg navbar-light bg-primary">
     <button
       class="navbar-toggler"
       type="button"
@@ -164,5 +164,7 @@ export default {
 
 
 <style scoped>
-
+.bg-green{
+  background-color: green;
+}
 </style>
