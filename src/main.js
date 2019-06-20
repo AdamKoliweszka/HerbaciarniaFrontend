@@ -27,6 +27,8 @@ import RegistrationByCustomer from "./RegistrationByCustomer.vue";
 import RegistrationEmployeeByEmployee from "./RegistrationEmployeeByEmployee.vue";
 import ShoppingCartByCustomer from "./ShoppingCartByCustomer.vue";
 import { store } from "./store.js"
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 Vue.use(VueRouter);
 
